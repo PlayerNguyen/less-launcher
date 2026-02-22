@@ -1,0 +1,9 @@
+{
+  "name": "@packages/minecraft-version-resolver",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "dependencies": {
+    "@packages/fs": "file:../fs"
+  }
+}
