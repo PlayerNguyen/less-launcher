@@ -1,11 +1,19 @@
-import '@mantine/core/styles.css';
-import React from 'react';
-import type { Preview } from '@storybook/react';
-import { MantineProvider } from '@mantine/core';
-import theme from '../src/theme';
+import "tailwindcss";
+import "@mantine/core/styles.css";
+import "@fontsource-variable/roboto-mono";
+import "@fontsource-variable/inter";
+
+import type { Preview } from "@storybook/react";
+import { MantineProvider } from "@mantine/core";
+import theme from "../src/theme";
 
 const preview: Preview = {
   parameters: {
+    darkMode: {
+      /**
+       * Placeholder for dark mode adjustment
+       */
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -13,8 +21,8 @@ const preview: Preview = {
       },
     },
     a11y: {
-      test: 'todo'
-    }
+      test: "todo",
+    },
   },
   decorators: [
     (Story) => (

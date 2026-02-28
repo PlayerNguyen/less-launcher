@@ -1,6 +1,5 @@
-import { Flex, Grid, Stack, Text, Title } from "@mantine/core";
+import { Button, Flex, Grid, Stack, Text, Title } from "@mantine/core";
 import ContentWrapper from "@src/components/ui/ContentWrapper";
-import CustomizableButton from "@src/components/ui/CustomizableButton";
 import UsernameTextInput from "@src/components/ui/UsernameTextInput";
 import VersionSelectBox from "@src/components/ui/VersionSelectBox";
 import { BiPlay } from "react-icons/bi";
@@ -28,7 +27,7 @@ export default function Home() {
                   <VersionSelectBox size="xs" />
                 </Grid.Col>
                 <Grid.Col>
-                  <CustomizableButton icon={<BiPlay />} title="Play" />
+                  <Button leftSection={<BiPlay />}>Play</Button>
                 </Grid.Col>
               </Grid>
             </Grid.Col>
