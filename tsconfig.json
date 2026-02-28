@@ -24,7 +24,9 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@packages/*": ["./packages/*"]
+      "@packages/*": ["./packages/*"],
+      "@src/*": ["./src/*"],
+      "@electron/*": ["./electron/*"]
     }
   },
   "include": ["src", "electron"],

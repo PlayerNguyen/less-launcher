@@ -1,14 +1,33 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { getAppDataPath } from '../fs'
 import { VersionInfo, Version, AssetIndex, TargetOS, Library, ResolvedResource } from './types'
 
 /**
  * Fetches the specific details for a given Minecraft version.
  */
 export async function getVersionDetails(versionInfo: VersionInfo): Promise<Version> {
+  const versionJsonPath = path.join(getAppDataPath(), 'versions', `${versionInfo.id}.json`)
+
+  if (fs.existsSync(versionJsonPath)) {
+    const content = await fs.promises.readFile(versionJsonPath, 'utf-8')
+    return JSON.parse(content)
+  }
+
   const response = await fetch(versionInfo.url)
   if (!response.ok) {
     throw new Error(`Failed to fetch version details for ${versionInfo.id}: ${response.statusText}`)
   }
-  return response.json()
+  
+  const versionData = await response.json()
+  
+  const versionDir = path.dirname(versionJsonPath)
+  if (!fs.existsSync(versionDir)) {
+    await fs.promises.mkdir(versionDir, { recursive: true })
+  }
+  await fs.promises.writeFile(versionJsonPath, JSON.stringify(versionData, null, 2), 'utf-8')
+
+  return versionData
 }
 
 /**
