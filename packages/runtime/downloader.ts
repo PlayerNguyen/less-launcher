@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import https from 'node:https'
-import { getAppDataPath, ensureDir, getRuntimePath } from "../fs";
+import { ensureDir, getRuntimePath } from "../fs";
 import {
   getLatestJREAsset,
   resolveAdaptiumFolder,

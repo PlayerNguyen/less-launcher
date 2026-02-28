@@ -8,7 +8,7 @@ import {
 import { getMinecraftDirectory, getVersionPath } from "../fs";
 import { setupJavaRuntime } from "../runtime";
 import { ArgumentBuilder } from "./arg-helper";
-import { exec, spawn } from "child_process";
+import { spawn } from "child_process";
 import path from "path";
 import { RunnerArgument } from "./runner-argument";
 import { BrowserWindow } from "electron";
