@@ -1,4 +1,10 @@
-import { Group, Stack, StyleProp, useMantineColorScheme } from "@mantine/core";
+import {
+  Group,
+  Stack,
+  StackProps,
+  StyleProp,
+  useMantineColorScheme,
+} from "@mantine/core";
 import {
   BiPlay,
   BiLeftArrow,
@@ -12,7 +18,9 @@ import useSidebarStore from "@src/stores/sidebar.store";
 import CustomizableButton from "../CustomizableButton";
 import clsx from "clsx";
 
-export type SidebarProps = {};
+export type SidebarProps = {
+  wrapperProps?: StackProps;
+};
 
 const menuItems = [
   {
@@ -27,7 +35,7 @@ const menuItems = [
   },
 ];
 
-export default function Sidebar({}: SidebarProps) {
+export default function Sidebar({ wrapperProps }: SidebarProps) {
   const { isCompact } = useSidebarStore();
   const { toggleColorScheme, colorScheme } = useMantineColorScheme();
   const width: StyleProp<React.CSSProperties["width"]> = isCompact
@@ -45,6 +53,7 @@ export default function Sidebar({}: SidebarProps) {
       bg={"primary"}
       className="min-h-screen max-h-screen p-2"
       gap={0}
+      {...wrapperProps}
     >
       {/* Top */}
       <Stack gap={"0.1rem"}>

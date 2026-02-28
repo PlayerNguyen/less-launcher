@@ -89,7 +89,7 @@ app.whenReady().then(() => {
   const menu = Menu.buildFromTemplate([
     {
       label: "Menu",
-      // @ts-ignore
+      // @ts-expect-error types do not perfectly align
       submenu: [...debuggerMenu(win), ...fileMenu],
     },
   ]);

@@ -20,7 +20,7 @@ export class DevDownloadVersionHandler implements IpcHandler {
       console.log(`[Dev] Fetching manifest to find version: ${versionId}`);
       const manifest = await getVersionManifest();
       const versionInfo = manifest.versions.find(
-        (v: any) => v.id === versionId,
+        (v: { id: string }) => v.id === versionId,
       );
 
       if (!versionInfo) {
@@ -53,9 +53,9 @@ export class DevDownloadVersionHandler implements IpcHandler {
 
       console.log(`[Dev] Successfully downloaded version ${versionId}!`);
       return { success: true, count: resources.length, path: targetDir };
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(`[Dev] Failed to download version ${versionId}:`, err);
-      return { success: false, error: err.message };
+      return { success: false, error: (err as unknown as Error).message };
     }
   }
 }

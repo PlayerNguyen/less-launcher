@@ -1,9 +1,9 @@
 // @see - https://www.electron.build/configuration/configuration
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "appId": "less-launcher",
   "asar": true,
-  "productName": "YourAppName",
+  "productName": "Less Launcher",
   "directories": {
     "output": "release/${version}"
   },
@@ -38,6 +38,8 @@
     "target": [
       "AppImage"
     ],
-    "artifactName": "${productName}-Linux-${version}.${ext}"
+  },
+  "publish": {
+    "provider": "github"
   }
 }

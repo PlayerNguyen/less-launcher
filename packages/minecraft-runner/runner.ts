@@ -4,15 +4,15 @@ import {
   getVersionDetails,
   resolveResources,
   Version,
-} from "../minecraft-version-resolver";
-import { getMinecraftDirectory, getVersionPath } from "../fs";
-import { setupJavaRuntime } from "../runtime";
+} from "@packages/minecraft-version-resolver";
+import { getMinecraftDirectory, getVersionPath } from "@packages/fs";
+import { setupJavaRuntime } from "@packages/runtime";
 import { ArgumentBuilder } from "./arg-helper";
-import { exec, spawn } from "child_process";
+import { spawn } from "child_process";
 import path from "path";
 import { RunnerArgument } from "./runner-argument";
 import { BrowserWindow } from "electron";
-import { getSystemCriteria } from "../minecraft-manifest-rules/helper";
+import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 
 async function getVersionInfo(versionId: string) {
   const versionInfo = await findVersionInfo(versionId);

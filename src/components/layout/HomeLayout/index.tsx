@@ -3,9 +3,7 @@ import Sidebar from "@src/components/ui/Sidebar";
 import { Outlet } from "react-router";
 import AppContent from "../AppContent";
 
-export type HomeLayoutProps = {};
-
-export default function HomeLayout({}: HomeLayoutProps) {
+export default function HomeLayout() {
   return (
     <Flex>
       <Sidebar />
