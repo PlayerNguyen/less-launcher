@@ -4,7 +4,7 @@ import { MenuItem, shell } from "electron";
 export const fileMenu: (MenuItem | Partial<MenuItem>)[] = [
   {
     label: "File",
-    // @ts-ignore
+    // @ts-expect-error types mismatch
     submenu: [
       {
         label: "Open resource file",

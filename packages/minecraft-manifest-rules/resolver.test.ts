@@ -21,7 +21,7 @@ describe("shouldAcceptRule", () => {
   });
 
   it("shouldReturnFalseWhenNoRulesHaveAllowAction", () => {
-    const rules: Rule[] = [{ action: "disallow" } as any];
+    const rules: Rule[] = [{ action: "disallow" } as unknown as Rule];
     const criteria: Criteria = { os: "windows" };
 
     const result = shouldAcceptRule(rules, criteria);

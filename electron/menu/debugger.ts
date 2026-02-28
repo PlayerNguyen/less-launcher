@@ -18,6 +18,7 @@ export const debuggerMenu: (
           await runMinecraft(latestReleaseVersionId, window);
         },
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ] as any,
   },
 ];

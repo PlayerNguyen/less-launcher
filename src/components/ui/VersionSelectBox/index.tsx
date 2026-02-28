@@ -13,7 +13,7 @@ export default function VersionSelectBox({ ...props }: VersionSelectBox) {
     if (!versions) {
       loadVersions();
     }
-  }, [versions]);
+  }, [versions, loadVersions]);
 
   const handleSelect = (_: string | null, option: ComboboxItem | null) => {
     settingStore.setState({ lastPlayedVersion: option ?? undefined });

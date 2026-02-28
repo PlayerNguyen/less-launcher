@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { ResolvedResource } from './types'
-import { ensureDir } from '../fs'
+import { ensureDir } from '@packages/fs'
 
 export interface DownloadOptions {
   /** Maximum number of concurrent downloads. Default is 10. */

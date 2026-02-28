@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { getVersionPath } from "../fs";
+import { getVersionPath } from "@packages/fs";
 import {
   VersionInfo,
   Version,
@@ -9,8 +9,8 @@ import {
   ResolvedResource,
   TargetOS,
 } from "./types";
-import { shouldAcceptRule } from "../minecraft-manifest-rules/resolver";
-import { getSystemCriteria } from "../minecraft-manifest-rules/helper";
+import { shouldAcceptRule } from "@packages/minecraft-manifest-rules/resolver";
+import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 
 /**
  * Fetches the specific details for a given Minecraft version.

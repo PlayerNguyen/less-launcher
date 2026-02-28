@@ -1,9 +1,11 @@
 import { TextInput, TextInputProps } from "@mantine/core";
 import { settingStore } from "@src/stores/settings.store";
 
-export type UsernameTextInputProps = TextInputProps & {};
+export type UsernameTextInputProps = TextInputProps;
 
-export default function UsernameTextInput({}: UsernameTextInputProps) {
+export default function UsernameTextInput({
+  ...props
+}: UsernameTextInputProps) {
   const { lastUsername } = settingStore.getState();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +18,7 @@ export default function UsernameTextInput({}: UsernameTextInputProps) {
       label="Username"
       value={lastUsername}
       onChange={handleOnChange}
+      {...props}
     />
   );
 }
