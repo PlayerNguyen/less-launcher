@@ -61,17 +61,30 @@ export async function downloadResources(
   targetDir: string,
   options: DownloadOptions = {}
 ): Promise<void> {
-  const concurrency = options.concurrency || 10
-  let completed = 0
-  
-  for (let i = 0; i < resources.length; i += concurrency) {
-    const chunk = resources.slice(i, i + concurrency)
-    await Promise.all(chunk.map(async (resource) => {
-      await downloadFile(resource, targetDir)
-      completed++
-      if (options.onProgress) {
-        options.onProgress(completed, resources.length)
+  const concurrency = Math.min(options.concurrency || 10, resources.length);
+  let completed = 0;
+  let index = 0;
+
+  // This worker pulls the next available task from the list
+  const worker = async () => {
+    while (index < resources.length) {
+      const resource = resources[index++]; // Get the next resource and move the pointer
+
+      try {
+        await downloadFile(resource, targetDir);
+      } catch (error) {
+        // Log error but allow other downloads to continue
+        console.error(`Failed to download ${resource.url}:`, error);
+      } finally {
+        completed++;
+        options.onProgress?.(completed, resources.length);
       }
-    }))
-  }
+    }
+  };
+
+  // Create a pool of workers running at the same time
+  const workers = Array(concurrency).fill(null).map(worker);
+
+  // Wait for all workers to finish their queues
+  await Promise.all(workers);
 }

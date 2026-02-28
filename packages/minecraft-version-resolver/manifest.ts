@@ -28,3 +28,15 @@ export async function getLatestVersions(): Promise<{ release: string; snapshot: 
   const manifest = await getVersionManifest()
   return manifest.latest
 }
+
+export async function findVersionInfo(
+  versionId: string,
+): Promise<VersionInfo | undefined> {
+  const manifest = await getVersionManifest();
+  const versions = manifest.versions;
+
+  const versionInfo: VersionInfo | undefined = versions.find(
+    (version) => version.id === versionId,
+  );
+  return versionInfo;
+} 

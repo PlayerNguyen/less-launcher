@@ -1,0 +1,11 @@
+{
+  "name": "@packages/minecraft-runner",
+  "description": "High-level API for calls run minecraft directly",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "dependencies": {
+    "@packages/fs": "file:../fs",
+    "@packages/minecraft-version-resolver": "file:../minecraft-version-resolver"
+  }
+}

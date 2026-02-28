@@ -1,9 +1,11 @@
 import path from "node:path";
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import { fileURLToPath } from "node:url";
 import { getIpcHandlerContext } from "../packages/ipc";
 import { DevDownloadVersionHandler } from "./ipc-handler/dev-download-version";
 import { ListMinecraftVersionsHandler } from "./ipc-handler/list-minecraft-versions";
+import { debuggerMenu } from "./menu/debugger";
+import { fileMenu } from "./menu/files";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -81,4 +83,15 @@ app.on("activate", () => {
   }
 });
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+
+  const menu = Menu.buildFromTemplate([
+    {
+      label: "Menu",
+      // @ts-ignore
+      submenu: [...debuggerMenu(win), ...fileMenu],
+    },
+  ]);
+  Menu.setApplicationMenu(menu);
+});
