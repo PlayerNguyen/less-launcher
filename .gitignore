@@ -34,3 +34,5 @@ release/
 
 # TypeScript incremental build cache
 *.tsbuildinfo
+*storybook.log
+storybook-static
