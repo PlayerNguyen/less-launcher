@@ -9,13 +9,13 @@ export const fileMenu: (MenuItem | Partial<MenuItem>)[] = [
       {
         label: "Open resource file",
         click: () => {
-          shell.showItemInFolder(getAppDataPath());
+          shell.openPath(getAppDataPath());
         },
       },
       {
         label: "Open launcher Minecraft folder",
         click: () => {
-          shell.openExternal(getMinecraftDirectory());
+          shell.openPath(getMinecraftDirectory());
         },
       },
     ],

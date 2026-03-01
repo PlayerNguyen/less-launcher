@@ -55,3 +55,17 @@ export type RunnerArgumentBuildOptions = {
   offlineMode?: boolean;
   quickPlay: QuickPlayOptions;
 };
+
+export type MinecraftRunOptions =
+  | MinecraftOfflineRunOptions
+  | MinecraftOnlineRunOptions;
+
+export interface MinecraftOfflineRunOptions {
+  type: "offline";
+  username: string;
+}
+
+export interface MinecraftOnlineRunOptions {
+  type: "online";
+  // TODO: implement later
+}

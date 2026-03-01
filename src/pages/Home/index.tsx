@@ -4,8 +4,19 @@ import VersionSelectBox from "@src/components/ui/VersionSelectBox";
 import { BiPhotoAlbum, BiPlay } from "react-icons/bi";
 import Tabs from "@src/components/ui/Tabs";
 import clsx from "clsx";
+import { useSettingStore } from "@src/stores/settings.store";
 
 export default function Home() {
+  const { lastPlayedVersion, lastUsername } = useSettingStore();
+
+  const handleStartGame = async () => {
+    // Call ipc
+    await window.ipcRenderer.invoke("app:run-minecraft", {
+      lastPlayedVersion,
+      lastUsername,
+    });
+  };
+
   return (
     <Tabs defaultValue="gallery">
       <Flex direction={"column"} mih={"100vh"} mah={"100vhh"}>
@@ -46,7 +57,9 @@ export default function Home() {
                   <VersionSelectBox size="xs" />
                 </Grid.Col>
                 <Grid.Col>
-                  <Button leftSection={<BiPlay />}>Play</Button>
+                  <Button leftSection={<BiPlay />} onClick={handleStartGame}>
+                    Play
+                  </Button>
                 </Grid.Col>
               </Grid>
             </Grid.Col>

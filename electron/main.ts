@@ -6,6 +6,7 @@ import { DevDownloadVersionHandler } from "./ipc-handler/dev-download-version";
 import { ListMinecraftVersionsHandler } from "./ipc-handler/list-minecraft-versions";
 import { debuggerMenu } from "./menu/debugger";
 import { fileMenu } from "./menu/files";
+import { RunMinecraftHandler } from "./ipc-handler/run-minecraft";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -57,6 +58,7 @@ function createWindow() {
   // Load ipc handler context
   getIpcHandlerContext().registerHandler(new DevDownloadVersionHandler());
   getIpcHandlerContext().registerHandler(new ListMinecraftVersionsHandler());
+  getIpcHandlerContext().registerHandler(new RunMinecraftHandler(win));
 
   getIpcHandlerContext()
     .loadAllHandlers()

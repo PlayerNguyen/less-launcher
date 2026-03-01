@@ -1,15 +1,15 @@
 import { TextInput, TextInputProps } from "@mantine/core";
-import { settingStore } from "@src/stores/settings.store";
+import { useSettingStore } from "@src/stores/settings.store";
 
 export type UsernameTextInputProps = TextInputProps;
 
 export default function UsernameTextInput({
   ...props
 }: UsernameTextInputProps) {
-  const { lastUsername } = settingStore.getState();
+  const { lastUsername, setLastUsername } = useSettingStore();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    settingStore.setState({ lastUsername: event.target.value });
+    setLastUsername(event.target.value);
   };
 
   return (
