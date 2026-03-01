@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Flex, Stack, Text, UnstyledButton } from "@mantine/core";
+import { Center, Flex, Stack, Text, UnstyledButton } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 
 interface SidebarGroupItemProps {
@@ -49,7 +49,7 @@ export default function SidebarGroupItem({
         align={"center"}
         justify={isCompact ? "center" : "start"}
       >
-        {icon}
+        <Center>{icon}</Center>
         {!isCompact ? (
           <Stack gap={"xs"}>
             <Text fw={"500"} size="1rem">

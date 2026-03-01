@@ -1,6 +1,5 @@
 import "@fontsource/inter";
 import "@fontsource-variable/roboto-mono";
-import "@mantine/core/styles.css";
 import "./App.css";
 
 import { MantineProvider } from "@mantine/core";

@@ -21,6 +21,18 @@ const theme = createTheme({
       "#464388",
       "#3b3979",
     ],
+    primaryLight: [
+      "#f3f3fb",
+      "#e1e1e6",
+      "#c9c9cf",
+      "#ababb5",
+      "#92929f",
+      "#828191",
+      "#79798c",
+      "#67677a",
+      "#5c5c6e",
+      "#4e4e63",
+    ],
     success: [
       "#eafbec",
       "#dcf0de",

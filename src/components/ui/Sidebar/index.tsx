@@ -36,7 +36,7 @@ export default function Sidebar({ wrapperProps }: SidebarProps) {
     ? { base: "64px" }
     : { base: "30vw", lg: "20vw", xl: "15vw", xxl: "10vw" };
 
-  const iconSize = isCompact ? "1.4rem" : "1.2rem";
+  const iconSize = isCompact ? "1.4em" : "1.6rem";
   const menuItems = [
     {
       icon: <BiPlay size={iconSize} />,
@@ -59,10 +59,11 @@ export default function Sidebar({ wrapperProps }: SidebarProps) {
   return (
     <Stack
       w={width}
-      bg={"dark.9"}
       className={clsx(
         "sidebar-wrapper min-h-screen max-h-screen p-2",
-        `transition-all ease-in-out duration-200`,
+        `transition-[width] ease-in-out duration-300`,
+        `overflow-x-hidden`,
+        `bg-(--mantine-color-primaryLight-0) dark:bg-(--mantine-color-dark-9)`,
       )}
       gap={"sm"}
       {...wrapperProps}
