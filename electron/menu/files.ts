@@ -1,4 +1,8 @@
-import { getAppDataPath, getMinecraftDirectory } from "@packages/fs";
+import {
+  getAppDataPath,
+  getLauncherConfigPath,
+  getMinecraftDirectory,
+} from "@packages/fs";
 import { MenuItem, shell } from "electron";
 
 export const fileMenu: (MenuItem | Partial<MenuItem>)[] = [
@@ -16,6 +20,13 @@ export const fileMenu: (MenuItem | Partial<MenuItem>)[] = [
         label: "Open launcher Minecraft folder",
         click: () => {
           shell.openPath(getMinecraftDirectory());
+        },
+      },
+
+      {
+        label: "Open launcher config",
+        click: () => {
+          shell.openPath(getLauncherConfigPath());
         },
       },
     ],

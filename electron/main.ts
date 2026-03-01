@@ -7,6 +7,9 @@ import { ListMinecraftVersionsHandler } from "./ipc-handler/list-minecraft-versi
 import { debuggerMenu } from "./menu/debugger";
 import { fileMenu } from "./menu/files";
 import { RunMinecraftHandler } from "./ipc-handler/run-minecraft";
+import { ConfigContext } from "@packages/config";
+import { LauncherMetadata } from "./configs/launcher-metadata";
+import { LauncherConfig } from "./configs/config";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -86,6 +89,13 @@ app.on("activate", () => {
 });
 
 app.whenReady().then(() => {
+  // Load config
+  ConfigContext.initialize<LauncherMetadata>(
+    LauncherConfig.Metadata,
+    new LauncherMetadata(),
+  );
+
+  // Create init window
   createWindow();
 
   const menu = Menu.buildFromTemplate([

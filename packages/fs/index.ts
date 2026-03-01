@@ -95,3 +95,7 @@ export function getRuntimeParent() {
 export function getRuntimePath(runtimeVersion: string) {
   return path.resolve(getRuntimeParent(), runtimeVersion);
 }
+
+export function getLauncherConfigPath() {
+  return path.resolve(getAppDataPath(), "launcher-configs");
+}
