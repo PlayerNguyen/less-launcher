@@ -10,6 +10,7 @@ import { RunMinecraftHandler } from "./ipc-handler/run-minecraft";
 import { ConfigContext } from "@packages/config";
 import { LauncherMetadata } from "./configs/launcher-metadata";
 import { LauncherConfig } from "./configs/config";
+import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -94,6 +95,7 @@ app.whenReady().then(() => {
     LauncherConfig.Metadata,
     new LauncherMetadata(),
   );
+  ConfigContext.initialize(RuntimeConfigIntent, new RuntimeConfig());
 
   // Create init window
   createWindow();

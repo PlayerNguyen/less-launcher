@@ -1,4 +1,4 @@
-import { getVersionPath } from "@packages/fs";
+import { getMinecraftDirectory, getVersionPath } from "@packages/fs";
 import * as path from "path";
 import * as fs from "fs";
 import { RunnerArgument } from "./runner-argument";
@@ -44,18 +44,18 @@ export class ArgumentBuilder {
     const versionId = version.id;
     this.argument.version.id = versionId;
     this.argument.paths.assetsDir = path.resolve(
-      getVersionPath(versionId),
+      getMinecraftDirectory(),
       "assets",
     );
     this.argument.paths.jarPath = path.resolve(
-      getVersionPath(versionId),
+      getMinecraftDirectory(),
       `versions`,
       versionId,
       `${versionId}.jar`,
     );
 
     this.argument.paths.nativesDir = path.resolve(
-      getVersionPath(versionId),
+      getMinecraftDirectory(),
       "natives",
     );
 
@@ -77,7 +77,7 @@ export class ArgumentBuilder {
   }
 
   private buildLibraries(versionId: string) {
-    const librariesDir = path.resolve(getVersionPath(versionId), "libraries");
+    const librariesDir = path.resolve(getMinecraftDirectory(), "libraries");
     const stack = [];
     stack.push(librariesDir);
 

@@ -26,7 +26,7 @@ async function getVersionInfo(versionId: string) {
 
 export async function prepareResource(versionDetail: Version) {
   const resources = await resolveResources(versionDetail);
-  await downloadResources(resources, getVersionPath(versionDetail.id), {});
+  await downloadResources(resources, getMinecraftDirectory(), {});
   return resources;
 }
 
