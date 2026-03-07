@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import CustomizableButton from "./index";
+import { BiStopCircle } from "react-icons/bi";
+
+import { AiFillAccountBook, AiOutlineCheck } from "react-icons/ai";
 
 const meta = {
   title: "UI/CustomizableButton",
@@ -18,6 +21,7 @@ export const Primary: Story = {
     title: "Primary Button",
     description: "This is a primary button description",
     variant: "primary",
+    icon: <AiFillAccountBook size={"2rem"} />,
   },
 };
 
@@ -34,6 +38,7 @@ export const Danger: Story = {
     title: "Danger Button",
     description: "This is a danger button description",
     variant: "danger",
+    icon: <BiStopCircle />,
   },
 };
 
@@ -42,5 +47,6 @@ export const Success: Story = {
     title: "Success Button",
     description: "This is a success button description",
     variant: "success",
+    icon: <AiOutlineCheck />,
   },
 };

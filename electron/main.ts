@@ -6,6 +6,11 @@ import { DevDownloadVersionHandler } from "./ipc-handler/dev-download-version";
 import { ListMinecraftVersionsHandler } from "./ipc-handler/list-minecraft-versions";
 import { debuggerMenu } from "./menu/debugger";
 import { fileMenu } from "./menu/files";
+import { RunMinecraftHandler } from "./ipc-handler/run-minecraft";
+import { ConfigContext } from "@packages/config";
+import { LauncherMetadata } from "./configs/launcher-metadata";
+import { LauncherConfig } from "./configs/config";
+import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -57,6 +62,7 @@ function createWindow() {
   // Load ipc handler context
   getIpcHandlerContext().registerHandler(new DevDownloadVersionHandler());
   getIpcHandlerContext().registerHandler(new ListMinecraftVersionsHandler());
+  getIpcHandlerContext().registerHandler(new RunMinecraftHandler(win));
 
   getIpcHandlerContext()
     .loadAllHandlers()
@@ -84,6 +90,14 @@ app.on("activate", () => {
 });
 
 app.whenReady().then(() => {
+  // Load config
+  ConfigContext.initialize<LauncherMetadata>(
+    LauncherConfig.Metadata,
+    new LauncherMetadata(),
+  );
+  ConfigContext.initialize(RuntimeConfigIntent, new RuntimeConfig());
+
+  // Create init window
   createWindow();
 
   const menu = Menu.buildFromTemplate([

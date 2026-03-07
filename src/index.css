@@ -1,1 +1,29 @@
+@layer theme, base, mantine, components, utilities;
+
 @import "tailwindcss";
+
+@layer mantine {
+  @import "@mantine/core/styles.css";
+}
+
+/*
+  Overwite the dark in tailwind to ensure
+  it is using the same dark theme style
+
+  https://tailwindcss.com/docs/dark-mode 
+*/
+@custom-variant dark (&:where([data-mantine-color-scheme="dark"], [data-mantine-color-scheme="dark"] *));
+
+/* Disables selection for the entire app */
+body {
+  -webkit-user-select: none;
+  -ms-user-select: none;    
+  user-select: none;        
+}
+
+/* Re-enable selection for inputs and text areas so users can still type */
+input, textarea {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

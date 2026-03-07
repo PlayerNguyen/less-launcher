@@ -1,8 +1,11 @@
 import {
+  ActionIcon,
+  Center,
   Group,
   Stack,
   StackProps,
   StyleProp,
+  Text,
   useMantineColorScheme,
 } from "@mantine/core";
 import {
@@ -15,32 +18,39 @@ import {
 } from "react-icons/bi";
 import SidebarGroupItem from "../SidebarGroupItem";
 import useSidebarStore from "@src/stores/sidebar.store";
-import CustomizableButton from "../CustomizableButton";
 import clsx from "clsx";
+import { useLocation, useNavigate } from "react-router";
 
 export type SidebarProps = {
   wrapperProps?: StackProps;
 };
 
-const menuItems = [
-  {
-    icon: <BiPlay size={"1.2rem"} />,
-    title: "Play",
-    description: "Starts playing game",
-  },
-  {
-    icon: <BiCog size={"1.2rem"} />,
-    title: "Settings",
-    description: "Launcher settings",
-  },
-];
 
 export default function Sidebar({ wrapperProps }: SidebarProps) {
   const { isCompact } = useSidebarStore();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { toggleColorScheme, colorScheme } = useMantineColorScheme();
+
   const width: StyleProp<React.CSSProperties["width"]> = isCompact
     ? { base: "64px" }
     : { base: "30vw", lg: "20vw", xl: "15vw", xxl: "10vw" };
+
+  const iconSize = isCompact ? "1.4em" : "1.6rem";
+  const menuItems = [
+    {
+      icon: <BiPlay size={iconSize} />,
+      title: "Play",
+      description: "Starts playing game",
+      path: "/",
+    },
+    {
+      icon: <BiCog size={iconSize} />,
+      title: "Settings",
+      description: "Launcher settings",
+      path: "/settings",
+    },
+  ];
 
   const handleCollapseSidebar = () => {
     useSidebarStore.setState({ isCompact: !isCompact });
@@ -49,20 +59,32 @@ export default function Sidebar({ wrapperProps }: SidebarProps) {
   return (
     <Stack
       w={width}
-      bd={"2px solid var(--mantine-color-primary-9)"}
-      bg={"primary"}
-      className="min-h-screen max-h-screen p-2"
-      gap={0}
+      className={clsx(
+        "sidebar-wrapper min-h-screen max-h-screen p-2",
+        `transition-[width] ease-in-out duration-300`,
+        `overflow-x-hidden`,
+        `bg-(--mantine-color-primaryLight-0) dark:bg-(--mantine-color-dark-9)`,
+      )}
+      gap={"sm"}
       {...wrapperProps}
     >
+      {/* Brand text */}
+      <Center ff={"monospace"}>
+        <Text size="md" fw={"700"} c={"primary.4"}>
+          Less
+        </Text>
+      </Center>
       {/* Top */}
-      <Stack gap={"0.1rem"}>
+      <Stack gap={"xs"}>
         {menuItems.map((item, index) => (
           <SidebarGroupItem
             key={index}
-            icon={item.icon}
             title={item.title}
             description={item.description}
+            icon={item.icon}
+            active={location.pathname === item.path}
+            onClick={() => navigate(item.path)}
+            isCompact={isCompact}
           />
         ))}
       </Stack>
@@ -70,14 +92,12 @@ export default function Sidebar({ wrapperProps }: SidebarProps) {
       {/* Bottom section */}
       <Stack gap={0} mt="auto">
         <Group className={clsx(`flex justify-end`)} gap={1}>
-          <CustomizableButton
-            onClick={handleCollapseSidebar}
-            icon={!isCompact ? <BiLeftArrow /> : <BiRightArrow />}
-          />
-          <CustomizableButton
-            onClick={toggleColorScheme}
-            icon={colorScheme === "dark" ? <BiSun /> : <BiMoon />}
-          />
+          <ActionIcon onClick={handleCollapseSidebar}>
+            {!isCompact ? <BiLeftArrow /> : <BiRightArrow />}
+          </ActionIcon>
+          <ActionIcon onClick={toggleColorScheme}>
+            {colorScheme === "dark" ? <BiSun /> : <BiMoon />}
+          </ActionIcon>
         </Group>
       </Stack>
     </Stack>

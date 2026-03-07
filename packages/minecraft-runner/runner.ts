@@ -13,6 +13,8 @@ import path from "path";
 import { RunnerArgument } from "./runner-argument";
 import { BrowserWindow } from "electron";
 import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
+import { getAdoptiumExecutePath } from "@packages/runtime/adoptium";
+import { ArgumentAuth, MinecraftRunOptions } from "./types";
 
 async function getVersionInfo(versionId: string) {
   const versionInfo = await findVersionInfo(versionId);
@@ -24,7 +26,7 @@ async function getVersionInfo(versionId: string) {
 
 export async function prepareResource(versionDetail: Version) {
   const resources = await resolveResources(versionDetail);
-  await downloadResources(resources, getVersionPath(versionDetail.id), {});
+  await downloadResources(resources, getMinecraftDirectory(), {});
   return resources;
 }
 
@@ -42,7 +44,24 @@ export async function prepareRuntime(versionDetail: Version) {
   });
 }
 
-export async function runMinecraft(versionId: string, window: BrowserWindow) {
+async function covertAuthArgument(options: MinecraftRunOptions) {
+  let userAuthProfile: ArgumentAuth;
+  if (options.type === "offline") {
+    userAuthProfile = { username: options.username, userType: "mojang" };
+  } else {
+    throw new Error(
+      `Unsupported options to build user profile: type=${options.type}`,
+    );
+  }
+
+  return userAuthProfile;
+}
+
+export async function runMinecraft(
+  versionId: string,
+  options: MinecraftRunOptions,
+  window?: BrowserWindow,
+) {
   const versionInfo = await getVersionInfo(versionId);
   const versionDetail = await getVersionDetails(versionInfo);
 
@@ -51,20 +70,21 @@ export async function runMinecraft(versionId: string, window: BrowserWindow) {
   const targetedRuntime = await prepareRuntime(versionDetail);
   console.log(targetedRuntime);
 
+  const authProfile = await covertAuthArgument(options);
+
   const argumentBuilder = new ArgumentBuilder()
     .withRuntimeDirectory(targetedRuntime)
     .withVersion(versionDetail)
     .withGameDir(path.resolve(getMinecraftDirectory()))
-    .withAuth({
-      username: "test",
-      userType: "mojang",
-    });
+    .withAuth(authProfile);
 
   const runnerArgument: RunnerArgument = argumentBuilder.buildArgument();
   console.log(
     `Running game with directory: ${runnerArgument.runtimeDirectory}`,
   );
-  const javaPath = path.resolve(runnerArgument.runtimeDirectory, "bin", "java");
+  const javaPath = await getAdoptiumExecutePath(
+    runnerArgument.runtimeDirectory,
+  );
 
   const rawArgs = runnerArgument.build(versionDetail, getSystemCriteria(), {
     offlineMode: true,
@@ -105,7 +125,7 @@ export async function runMinecraft(versionId: string, window: BrowserWindow) {
     child.on("close", (code) => {
       console.log(`Minecraft exited with code ${code}`);
       // Focus to the current window
-      window.focus();
+      window?.focus();
     });
   }
 }

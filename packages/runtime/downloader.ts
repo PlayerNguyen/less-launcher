@@ -9,6 +9,8 @@ import {
 } from "./adoptium";
 import extractZip from "extract-zip";
 import * as tar from "tar";
+import { ConfigContext } from "@packages/config";
+import { RuntimeConfigIntent } from "./config";
 
 /**
  * Downloads a file to a streaming destination
@@ -63,6 +65,29 @@ async function downloadFile(url: string, dest: string): Promise<void> {
 }
 
 /**
+ * Compares the provided major version against the version stored in the configuration.
+ * Returns the higher of the two versions to ensure the system uses the latest available runtime.
+ * * @param currentMajor Version currently being requested or used by the system.
+ * @returns The resolved version (either the input or the updated version from config).
+ */
+function resolveLatestRuntime(currentMajor: number | string): string | number {
+  const config = ConfigContext.use(RuntimeConfigIntent);
+  const latestConfigRuntime = config.get("latestRuntimeVersion");
+
+  // If no remote/config version is set, stick with the current system version
+  if (latestConfigRuntime === undefined || latestConfigRuntime === null) {
+    return currentMajor;
+  }
+
+  // Use Number() to ensure we are comparing values, not strings (e.g., 10 > 9, but "10" < "9")
+  if (Number(latestConfigRuntime) > Number(currentMajor)) {
+    return latestConfigRuntime;
+  }
+
+  return currentMajor;
+}
+
+/**
  * Downloads and extracts the Java Runtime from Adoptium
  * @param version The major version of the runtime to download (e.g. 17)
  * @param onProgress Optional callback to receive status updates
@@ -73,7 +98,7 @@ export async function setupJavaRuntime(
   version: number | string,
   onProgress?: (message: string) => void,
 ): Promise<string> {
-  const versionStr = version.toString();
+  const versionStr = resolveLatestRuntime(version).toString();
   const runtimeBaseDir = getRuntimePath(versionStr);
   await ensureDir(runtimeBaseDir);
 
@@ -83,6 +108,9 @@ export async function setupJavaRuntime(
 
   if (fs.existsSync(targetDir) && fs.readdirSync(targetDir).length > 0) {
     onProgress?.("Found existing Java Runtime version " + versionStr);
+    ConfigContext.use(RuntimeConfigIntent).set({
+      latestRuntimeVersion: versionStr,
+    });
     return await resolveAdaptiumFolder(targetDir);
   }
 
@@ -130,5 +158,8 @@ export async function setupJavaRuntime(
 
   onProgress?.(`Java Runtime successfully installed at ${targetDir}`);
 
+  ConfigContext.use(RuntimeConfigIntent).set({
+    latestRuntimeVersion: versionStr,
+  });
   return await resolveAdaptiumFolder(targetDir);
 }

@@ -1,6 +1,6 @@
 import { ComboboxItem } from "@mantine/core";
-import { createStore } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export interface SettingsState {
   lastUsername?: string;
@@ -10,7 +10,7 @@ export interface SettingsState {
   setLastPlayedVersion: (version: ComboboxItem | null) => void;
 }
 
-export const settingStore = createStore<SettingsState>()(
+export const useSettingStore = create<SettingsState>()(
   persist(
     (set) => ({
       // Last username
@@ -24,6 +24,7 @@ export const settingStore = createStore<SettingsState>()(
     }),
     {
       name: "settings-storage",
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 );

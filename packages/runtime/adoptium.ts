@@ -1,4 +1,5 @@
 import fs from "fs";
+import { platform } from "os";
 import path from "path";
 
 const BASE_URL = "https://api.adoptium.net/v3/assets/latest";
@@ -83,10 +84,58 @@ export async function getLatestJREAsset(
  * @param targetDirectory the target directory
  */
 export async function resolveAdaptiumFolder(targetDirectory: string) {
-  const files = fs.readdirSync(targetDirectory);
-  if (files.length > 1 || files.length === 0) {
-    throw new Error(`Unsupported archive format: ${targetDirectory}`);
+  if (!fs.existsSync(targetDirectory)) {
+    throw new Error(`Directory does not exist: ${targetDirectory}`);
   }
 
-  return path.resolve(targetDirectory, files[0]);
+  // Filter out some redundant files (.DSStore on osx)
+  const files = fs
+    .readdirSync(targetDirectory)
+    .filter((file) => !file.startsWith("."));
+
+  if (files.length === 0) {
+    throw new Error(`Target directory is empty: ${targetDirectory}`);
+  }
+
+  const mainFolder = files.find((f) =>
+    fs.statSync(path.join(targetDirectory, f)).isDirectory(),
+  );
+
+  if (!mainFolder) {
+    throw new Error(`No valid directory found in: ${targetDirectory}`);
+  }
+
+  return path.resolve(targetDirectory, mainFolder);
+}
+
+export async function getAdoptiumExecutePath(targetDirectory: string) {
+  const currentPlatform = platform();
+
+  if (currentPlatform === "darwin") {
+    /**
+     * OSX requires a different JRE
+     * contents
+     */
+    const macPath = path.join(
+      targetDirectory,
+      "Contents",
+      "Home",
+      "bin",
+      "java",
+    );
+    const exist = fs.existsSync(macPath);
+    console.log({ exist, macPath });
+
+    if (fs.existsSync(macPath)) {
+      return macPath;
+    }
+
+    return path.join(targetDirectory, "bin", "java");
+  }
+
+  if (currentPlatform === "win32") {
+    return path.join(targetDirectory, "bin", "java.exe");
+  }
+
+  return path.join(targetDirectory, "bin", "java");
 }

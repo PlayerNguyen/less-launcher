@@ -1,23 +1,41 @@
-import { Flex, Grid, Stack, Text, Title } from "@mantine/core";
-import ContentWrapper from "@src/components/ui/ContentWrapper";
-import CustomizableButton from "@src/components/ui/CustomizableButton";
+import { Button, Flex, Grid, Stack, Text, Title } from "@mantine/core";
 import UsernameTextInput from "@src/components/ui/UsernameTextInput";
 import VersionSelectBox from "@src/components/ui/VersionSelectBox";
-import { BiPlay } from "react-icons/bi";
+import { BiNews, BiPlay } from "react-icons/bi";
+import Tabs from "@src/components/ui/Tabs";
+import clsx from "clsx";
+import { useSettingStore } from "@src/stores/settings.store";
 
 export default function Home() {
+  const { lastPlayedVersion, lastUsername } = useSettingStore();
+
+  const handleStartGame = () =>
+    window.ipcRenderer.invoke("app:run-minecraft", {
+      lastPlayedVersion,
+      lastUsername,
+    });
+
   return (
-    <Flex direction={"column-reverse"} mih={"100vh"} mah={"100vhh"}>
-      <Stack>
-        <ContentWrapper
-          customStyle={{
-            borderLeftWidth: "0",
-          }}
+    <Tabs defaultValue="news">
+      <Flex direction={"column"} mih={"100vh"} mah={"100vhh"}>
+        <Stack
+          p={"xs"}
+          className={clsx(
+            `bg-(--mantine-color-primaryLight-0) dark:bg-(--mantine-color-dark-9)`,
+          )}
         >
           <Grid p={"sm"}>
             <Grid.Col span={8}>
-              <Title order={3}>Home</Title>
-              <Text size="xs">Welcome to the home page!</Text>
+              <Stack>
+                <Title order={3}>Home</Title>
+                <Text size="xs">Welcome to the home page!</Text>
+                {/* Tabs */}
+                <Tabs.List>
+                  <Tabs.Tab value="news" leftSection={<BiNews size={12} />}>
+                    News
+                  </Tabs.Tab>
+                </Tabs.List>
+              </Stack>
             </Grid.Col>
             <Grid.Col span={4}>
               <Grid gutter={2}>
@@ -28,13 +46,17 @@ export default function Home() {
                   <VersionSelectBox size="xs" />
                 </Grid.Col>
                 <Grid.Col>
-                  <CustomizableButton icon={<BiPlay />} title="Play" />
+                  <Button leftSection={<BiPlay />} onClick={handleStartGame}>
+                    Play
+                  </Button>
                 </Grid.Col>
               </Grid>
             </Grid.Col>
           </Grid>
-        </ContentWrapper>
-      </Stack>
-    </Flex>
+        </Stack>
+
+        <Tabs.Panel value="news">News block</Tabs.Panel>
+      </Flex>
+    </Tabs>
   );
 }

@@ -1,13 +1,13 @@
 import { ComboboxItem, Select, SelectProps } from "@mantine/core";
 import useMinecraftVersionStore from "@src/stores/minecraft-version.store";
-import { settingStore } from "@src/stores/settings.store";
+import { useSettingStore } from "@src/stores/settings.store";
 import { useEffect } from "react";
 
 export interface VersionSelectBox extends SelectProps {}
 
 export default function VersionSelectBox({ ...props }: VersionSelectBox) {
   const { versions, loadVersions } = useMinecraftVersionStore();
-  const { lastPlayedVersion } = settingStore.getState();
+  const { lastPlayedVersion, setLastPlayedVersion } = useSettingStore();
 
   useEffect(() => {
     if (!versions) {
@@ -16,7 +16,7 @@ export default function VersionSelectBox({ ...props }: VersionSelectBox) {
   }, [versions, loadVersions]);
 
   const handleSelect = (_: string | null, option: ComboboxItem | null) => {
-    settingStore.setState({ lastPlayedVersion: option ?? undefined });
+    setLastPlayedVersion(option);
   };
 
   return (
