@@ -2,17 +2,17 @@ import { IpcHandler } from "@packages/ipc/types";
 import { runMinecraft } from "@packages/minecraft-runner/runner";
 import { SettingsState } from "@src/stores/settings.store";
 import { BrowserWindow, IpcMainInvokeEvent } from "electron";
-
+import log from "electron-log/main";
 export class RunMinecraftHandler implements IpcHandler {
   channel: string = "app:run-minecraft";
 
   public constructor(public browserWindow: BrowserWindow) {}
 
   listener = (_: IpcMainInvokeEvent, settings: SettingsState) => {
-    console.log(`Trigger run minecraft game`);
+    log.info(`Trigger run minecraft game via RunMinecraftHandler`);
     const { lastPlayedVersion, lastUsername } = settings;
-    console.log(
-      `Starting Minecraft ${lastPlayedVersion} with username ${lastUsername}`,
+    log.info(
+      `Starting Minecraft ${lastPlayedVersion?.value} with username ${lastUsername}`,
     );
 
     // Start from service

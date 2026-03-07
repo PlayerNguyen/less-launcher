@@ -1,6 +1,7 @@
 import fs from "fs";
 import { platform } from "os";
 import path from "path";
+import log from "electron-log";
 
 const BASE_URL = "https://api.adoptium.net/v3/assets/latest";
 
@@ -124,7 +125,7 @@ export async function getAdoptiumExecutePath(targetDirectory: string) {
       "java",
     );
     const exist = fs.existsSync(macPath);
-    console.log({ exist, macPath });
+    log.error(`Existing on the mac path: ${exist}`);
 
     if (fs.existsSync(macPath)) {
       return macPath;

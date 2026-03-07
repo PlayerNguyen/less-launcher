@@ -21,6 +21,8 @@ export abstract class ConfigObject<T> {
    */
   public loadOrDefault(defaultValue: T) {
     const filePath = this.filePath;
+    const parentPath = path.dirname(filePath);
+    ensureDir(parentPath);
 
     if (!existsSync(filePath)) {
       this.state = defaultValue;

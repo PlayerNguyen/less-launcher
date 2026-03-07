@@ -11,6 +11,7 @@ import { ConfigContext } from "@packages/config";
 import { LauncherMetadata } from "./configs/launcher-metadata";
 import { LauncherConfig } from "./configs/config";
 import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
+import log from "electron-log/main";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -67,7 +68,7 @@ function createWindow() {
   getIpcHandlerContext()
     .loadAllHandlers()
     .then(() => {
-      console.log(`Registered ${getIpcHandlerContext().size()} handlers.`);
+      log.info(`Registered ${getIpcHandlerContext().size()} handlers.`);
     });
 }
 
@@ -90,6 +91,11 @@ app.on("activate", () => {
 });
 
 app.whenReady().then(() => {
+  // Load logger
+  log.initialize();
+  log.info(
+    `Starting application: env=${process.env.NODE_ENV}; root=${process.env.APP_ROOT} `,
+  );
   // Load config
   ConfigContext.initialize<LauncherMetadata>(
     LauncherConfig.Metadata,

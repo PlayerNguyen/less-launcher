@@ -5,7 +5,7 @@ import {
   resolveResources,
   Version,
 } from "@packages/minecraft-version-resolver";
-import { getMinecraftDirectory, getVersionPath } from "@packages/fs";
+import { getMinecraftDirectory } from "@packages/fs";
 import { setupJavaRuntime } from "@packages/runtime";
 import { ArgumentBuilder } from "./arg-helper";
 import { spawn } from "child_process";
@@ -15,6 +15,7 @@ import { BrowserWindow } from "electron";
 import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 import { getAdoptiumExecutePath } from "@packages/runtime/adoptium";
 import { ArgumentAuth, MinecraftRunOptions } from "./types";
+import log from "electron-log";
 
 async function getVersionInfo(versionId: string) {
   const versionInfo = await findVersionInfo(versionId);
@@ -66,9 +67,11 @@ export async function runMinecraft(
   const versionDetail = await getVersionDetails(versionInfo);
 
   const resources = await prepareResource(versionDetail);
-  console.log(`Resolved ${resources.length} resources for ${versionId}`);
+  log.info(
+    `Resolved ${resources.length} resources for minecraft version=${versionId}`,
+  );
   const targetedRuntime = await prepareRuntime(versionDetail);
-  console.log(targetedRuntime);
+  log.debug(`Targeted runtime: ${targetedRuntime}`);
 
   const authProfile = await covertAuthArgument(options);
 
@@ -79,9 +82,7 @@ export async function runMinecraft(
     .withAuth(authProfile);
 
   const runnerArgument: RunnerArgument = argumentBuilder.buildArgument();
-  console.log(
-    `Running game with directory: ${runnerArgument.runtimeDirectory}`,
-  );
+  log.info(`Running game in directory: ${runnerArgument.runtimeDirectory}`);
   const javaPath = await getAdoptiumExecutePath(
     runnerArgument.runtimeDirectory,
   );
@@ -93,11 +94,8 @@ export async function runMinecraft(
     },
   });
 
-  if (process.env.NODE_ENV === "development") {
-    console.log({ rawArgs });
-    console.log({ javaPath });
-  }
-
+  log.debug("Raw arguments: ", rawArgs);
+  log.debug("Java path: ", javaPath);
   const child = spawn(javaPath, rawArgs, {
     stdio: "pipe",
     // IMPORTANT: Minecraft usually needs the run directory specified.
@@ -108,24 +106,22 @@ export async function runMinecraft(
     // Capture standard output
     child.stdout.on("data", (data) => {
       // .toString() converts the raw Buffer into readable text
-      console.log(`stdout: ${data.toString()}`);
+      log.info(`[Minecraft] stdout: ${data.toString()}`);
     });
 
     // Capture standard error (Crucial for Minecraft logs)
     child.stderr.on("data", (data) => {
-      console.error(`stderr: ${data.toString()}`);
+      log.info(`[Minecraft] stderr: ${data.toString()}`);
     });
 
     // Catch immediate spawning errors (e.g., bad Java path)
     child.on("error", (error) => {
-      console.error(`Process error: ${error.message}`);
+      log.error("Game failed to spawn due to error:", error.message);
     });
 
     // See exactly when and how the game exits
     child.on("close", (code) => {
-      console.log(`Minecraft exited with code ${code}`);
-      // Focus to the current window
-      window?.focus();
+      log.info(`Minecraft exited with code ${code}`);
     });
   }
 }

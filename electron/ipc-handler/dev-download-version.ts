@@ -8,7 +8,7 @@ import {
 } from "../../packages/minecraft-version-resolver";
 import { IpcMainInvokeEvent } from "electron";
 import * as path from "path";
-
+import log from "electron-log";
 export class DevDownloadVersionHandler implements IpcHandler {
   channel: string = "dev:download-version";
 
@@ -17,7 +17,7 @@ export class DevDownloadVersionHandler implements IpcHandler {
    */
   async listener(_: IpcMainInvokeEvent, versionId: string) {
     try {
-      console.log(`[Dev] Fetching manifest to find version: ${versionId}`);
+      log.info(`[Dev] Fetching manifest to find version: ${versionId}`);
       const manifest = await getVersionManifest();
       const versionInfo = manifest.versions.find(
         (v: { id: string }) => v.id === versionId,
@@ -27,16 +27,14 @@ export class DevDownloadVersionHandler implements IpcHandler {
         throw new Error(`Version ${versionId} not found in manifest.`);
       }
 
-      console.log(`[Dev] Fetching metadata for ${versionId}...`);
+      log.info(`[Dev] Fetching metadata for ${versionId}...`);
       const details = await getVersionDetails(versionInfo);
 
-      console.log(
-        `[Dev] Resolving required resources for ${process.platform}...`,
-      );
+      log.info(`[Dev] Resolving required resources for ${process.platform}...`);
       const resources = await resolveResources(details);
 
       const targetDir = path.join(getAppDataPath(), "versions", versionId);
-      console.log(
+      log.info(
         `[Dev] Starting download of ${resources.length} objects to ${targetDir}...`,
       );
 
@@ -44,17 +42,17 @@ export class DevDownloadVersionHandler implements IpcHandler {
         concurrency: 10,
         onProgress: (done: number, total: number) => {
           if (done % 50 === 0 || done === total) {
-            console.log(
+            log.info(
               `[Dev] Download progress: ${done}/${total} (${Math.round((done / total) * 100)}%)`,
             );
           }
         },
       });
 
-      console.log(`[Dev] Successfully downloaded version ${versionId}!`);
+      log.info(`[Dev] Successfully downloaded version ${versionId}!`);
       return { success: true, count: resources.length, path: targetDir };
     } catch (err: unknown) {
-      console.error(`[Dev] Failed to download version ${versionId}:`, err);
+      log.error(`[Dev] Failed to download version ${versionId}:`, err);
       return { success: false, error: (err as unknown as Error).message };
     }
   }
