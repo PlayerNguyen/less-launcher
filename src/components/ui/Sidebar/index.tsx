@@ -1,47 +1,29 @@
-import {
-  ActionIcon,
-  Center,
-  Group,
-  Stack,
-  StackProps,
-  StyleProp,
-  Text,
-  useMantineColorScheme,
-} from "@mantine/core";
-import {
-  BiPlay,
-  BiLeftArrow,
-  BiRightArrow,
-  BiCog,
-  BiSun,
-  BiMoon,
-} from "react-icons/bi";
-import SidebarGroupItem from "../SidebarGroupItem";
+import { Button, Stack, StackProps, Text } from "@mantine/core";
+import { BiCog } from "react-icons/bi";
+import { LuDock } from "react-icons/lu";
 import useSidebarStore from "@src/stores/sidebar.store";
 import clsx from "clsx";
 import { useLocation, useNavigate } from "react-router";
+import { SidebarItem } from "./components/Item";
+import { SidebarGroupDivider } from "./components/SidebarGroupDivider";
+import { SidebarProfileSection } from "./components/SidebarProfileSection";
 
 export type SidebarProps = {
   wrapperProps?: StackProps;
+  className?: string;
 };
 
-
-export default function Sidebar({ wrapperProps }: SidebarProps) {
+export default function Sidebar({ wrapperProps, className }: SidebarProps) {
   const { isCompact } = useSidebarStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const { toggleColorScheme, colorScheme } = useMantineColorScheme();
+  // const { toggleColorScheme, colorScheme } = useMantineColorScheme();
 
-  const width: StyleProp<React.CSSProperties["width"]> = isCompact
-    ? { base: "64px" }
-    : { base: "30vw", lg: "20vw", xl: "15vw", xxl: "10vw" };
-
-  const iconSize = isCompact ? "1.4em" : "1.6rem";
+  const iconSize = isCompact ? "1.4em" : "0.8rem";
   const menuItems = [
     {
-      icon: <BiPlay size={iconSize} />,
-      title: "Play",
-      description: "Starts playing game",
+      icon: <LuDock size={iconSize} />,
+      title: "Home",
       path: "/",
     },
     {
@@ -52,54 +34,32 @@ export default function Sidebar({ wrapperProps }: SidebarProps) {
     },
   ];
 
-  const handleCollapseSidebar = () => {
-    useSidebarStore.setState({ isCompact: !isCompact });
-  };
-
   return (
     <Stack
-      w={width}
-      className={clsx(
-        "sidebar-wrapper min-h-screen max-h-screen p-2",
-        `transition-[width] ease-in-out duration-300`,
-        `overflow-x-hidden`,
-        `bg-(--mantine-color-primaryLight-0) dark:bg-(--mantine-color-dark-9)`,
-      )}
       gap={"sm"}
+      className={clsx(
+        "sidebar-wrapper",
+        `transition-[width] ease-in-out duration-300 px-4`,
+        className,
+      )}
       {...wrapperProps}
     >
-      {/* Brand text */}
-      <Center ff={"monospace"}>
-        <Text size="md" fw={"700"} c={"primary.4"}>
-          Less
-        </Text>
-      </Center>
-      {/* Top */}
-      <Stack gap={"xs"}>
-        {menuItems.map((item, index) => (
-          <SidebarGroupItem
-            key={index}
-            title={item.title}
-            description={item.description}
-            icon={item.icon}
-            active={location.pathname === item.path}
-            onClick={() => navigate(item.path)}
-            isCompact={isCompact}
-          />
-        ))}
-      </Stack>
-
-      {/* Bottom section */}
-      <Stack gap={0} mt="auto">
-        <Group className={clsx(`flex justify-end`)} gap={1}>
-          <ActionIcon onClick={handleCollapseSidebar}>
-            {!isCompact ? <BiLeftArrow /> : <BiRightArrow />}
-          </ActionIcon>
-          <ActionIcon onClick={toggleColorScheme}>
-            {colorScheme === "dark" ? <BiSun /> : <BiMoon />}
-          </ActionIcon>
-        </Group>
-      </Stack>
+      <div className="sidebar-block flex flex-col gap-2 flex-1">
+        <SidebarGroupDivider label="launcher" />
+        {menuItems.map((item) => {
+          return (
+            <SidebarItem
+              icon={item.icon}
+              label={item.title}
+              active={location.pathname === item.path}
+              onClick={() => navigate(item.path)}
+            />
+          );
+        })}
+      </div>
+      <div className="sidebar-block mb-8">
+        <SidebarProfileSection />
+      </div>
     </Stack>
   );
 }

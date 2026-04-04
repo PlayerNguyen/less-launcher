@@ -1,4 +1,6 @@
-/* index.css */
-html, body {
-  background-color: var(--mantine-color-body);
+
+:root {
+  @mixin dark-root {
+    --mantine-color-body: var(--bg-dark-primary);
+  }
 }

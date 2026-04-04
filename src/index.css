@@ -18,7 +18,10 @@
 body {
   -webkit-user-select: none;
   -ms-user-select: none;    
-  user-select: none;        
+  user-select: none;    
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;    
 }
 
 /* Re-enable selection for inputs and text areas so users can still type */
@@ -26,4 +29,8 @@ input, textarea {
   -webkit-user-select: text;
   -ms-user-select: text;
   user-select: text;
+}
+
+html {
+  scroll-behavior: smooth;
 }

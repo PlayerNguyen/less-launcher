@@ -12,7 +12,7 @@ const router = createMemoryRouter([
         element: <Home />,
       },
       {
-        path: "about",
+        path: "settings",
         element: <h1>About</h1>,
       },
     ],

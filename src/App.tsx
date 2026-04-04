@@ -1,5 +1,7 @@
+import "@fontsource-variable/inter/wght.css";
 import "@fontsource/inter";
 import "@fontsource-variable/roboto-mono";
+import "./themes.css";
 import "./App.css";
 
 import { MantineProvider } from "@mantine/core";

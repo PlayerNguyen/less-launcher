@@ -1,5 +1,4 @@
 import { createTheme } from "@mantine/core";
-import { ButtonTheme } from "./themes/Button";
 import { ActionIconTheme } from "./themes/ActionIcon";
 
 const theme = createTheme({
@@ -10,16 +9,16 @@ const theme = createTheme({
   fontFamilyMonospace: "'Roboto Mono Variable', monospace",
   colors: {
     primary: [
-      "#f1f1ff",
-      "#e0dff2",
-      "#bfbdde",
-      "#9b98ca",
-      "#7d79b9",
-      "#6a66af",
-      "#605cac",
-      "#504c97",
-      "#464388",
-      "#3b3979",
+      "#e9f7ff",
+      "#dce9f3",
+      "#bcd0de",
+      "#99b6ca",
+      "#7ca0b9",
+      "#6892af",
+      "#5787a8",
+      "#4c7897",
+      "#3f6b88",
+      "#2d5d7a",
     ],
     primaryLight: [
       "#f3f3fb",
@@ -82,15 +81,16 @@ const theme = createTheme({
       "#2f7556",
     ],
   },
-  focusRing: "always",
+  focusRing: "never",
   cursorType: "pointer",
   primaryColor: "primary",
-  defaultRadius: 0,
+  defaultRadius: 12,
   luminanceThreshold: 0.23,
   components: {
-    Button: ButtonTheme,
+    // Button: ButtonTheme,
     ActionIcon: ActionIconTheme,
   },
+  activeClassName: "active",
 });
 
 export default theme;

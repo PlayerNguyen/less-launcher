@@ -1,5 +1,5 @@
 import path from "node:path";
-import { app, BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, globalShortcut, Menu } from "electron";
 import { fileURLToPath } from "node:url";
 import { getIpcHandlerContext } from "../packages/ipc";
 import { DevDownloadVersionHandler } from "./ipc-handler/dev-download-version";
@@ -42,6 +42,12 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
+    },
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#232323",
+      symbolColor: "#E9F7FF",
+      height: 32,
     },
   });
 

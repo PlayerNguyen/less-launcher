@@ -1,0 +1,45 @@
+:root {
+  /* Borders */
+  --border-primary: #555555;
+  --border-lighter: #808080;
+  --border-darker: #3c3c3c;
+
+  /* Backgrounds */
+  --bg-dark-primary: #232323;
+  --bg-dark-secondary: #1a1a1a;
+
+  /* Brand Primary */
+  --brand-primary: #5787a8;
+
+  /* Buttons */
+  --button-primary-bg: #5787a8;
+  --button-primary-text: #17191a;
+  --button-primary-bg-hover: var(--brand-7); /* Mapping from Primary[7] */
+
+  --button-secondary-bg: var(--brand-4); /* Mapping from Primary[4] */
+  --button-secondary-text: #2f2d6a;
+
+  /* Brand Scale */
+  --brand-0: #e9f7ff;
+  --brand-1: #dce9f3;
+  --brand-2: #bcd0de;
+  --brand-3: #99b6ca;
+  --brand-4: #7ca0b9;
+  --brand-5: #6892af;
+  --brand-6: #5787a8;
+  --brand-7: #4c7897;
+  --brand-8: #3f6b88;
+
+  /* Side bar items */
+  --sidebar-item-bg-hover: #434343;
+  --sidebar-item-color-text: var(--brand-3);
+}
+
+.active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:active {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}

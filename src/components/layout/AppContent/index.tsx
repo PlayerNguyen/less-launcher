@@ -1,4 +1,5 @@
 import { Box } from "@mantine/core";
+import { SafeArea } from "@src/components/ui/SafeArea";
 import clsx from "clsx";
 import React from "react";
 
@@ -8,13 +9,17 @@ export type AppContentProps = {
 
 export default function AppContent({ children }: AppContentProps) {
   return (
-    <Box
-      className={clsx(
-        `min-h-screen max-h-screen overflow-auto`,
-        `flex-1 w-auto`,
-      )}
-    >
-      {children}
-    </Box>
+    <div className="bg-(--bg-dark-primary) overflow-hidden">
+      <SafeArea>
+        <Box
+          className={clsx(
+            `overflow-auto`,
+            `w-auto bg-(--bg-dark-secondary) rounded-xl overflow-scroll`,
+          )}
+        >
+          {children}
+        </Box>
+      </SafeArea>
+    </div>
   );
 }
