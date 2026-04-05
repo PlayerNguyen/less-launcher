@@ -43,18 +43,20 @@ export default function AppLayout() {
           <>
             <Sidebar className={clsx(`w-60`)} />
 
-            <Flex direction={"column"} className="flex-1" h="100%">
-              <Flex className="flex-1">
-                <div
-                  className={clsx(
-                    `bg-(--bg-dark-secondary) rounded-xl`,
-                    `overflow-auto mx-4 flex-1 mb-8`,
-                  )}
-                >
-                  <Outlet />
-                </div>
-              </Flex>
-            </Flex>
+            {/* Fill height to full with flex-1 */}
+            <div
+              className={clsx("app-layout-width-fill flex-1 block relative")}
+            >
+              <div
+                className={clsx(
+                  `bg-(--bg-dark-secondary)`,
+                  `h-full w-full absolute`,
+                  `rounded-xl`,
+                )}
+              >
+                <Outlet />
+              </div>
+            </div>
           </>
         )}
       </Flex>

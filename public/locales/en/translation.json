@@ -20,5 +20,9 @@
     "change_username": "Change name",
     "home": "Home",
     "settings": "Settings"
+  },
+  "home": {
+    "no_profile": "No profile was created. You will need to create a new profile to play.",
+    "create_new_profile": "Create new profile"
   }
 }

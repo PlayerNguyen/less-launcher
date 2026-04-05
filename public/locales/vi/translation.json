@@ -19,5 +19,9 @@
     "change_username": "Đổi tên người chơi",
     "home": "Trang chủ",
     "settings": "Cài đặt"
+  },
+  "home": {
+    "no_profile": "Chưa có hồ sơ nào được tạo. Bạn cần tạo hồ sơ mới để bắt đầu chơi.",
+    "create_new_profile": "Tạo hồ sơ mới"
   }
 }

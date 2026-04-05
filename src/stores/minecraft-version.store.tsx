@@ -1,22 +1,25 @@
 import { create } from "zustand";
+import {
+  Loadable,
+  initialLoadable,
+  createIpcAction,
+} from "./util/loadable.store";
 
-type MinecraftVersionStore = {
-  versions?: string[];
-  setVersions: (versions: string[]) => void;
-  loadVersions: () => void;
-};
+interface MinecraftVersionStore {
+  versions: Loadable<string[]>;
+  loadVersions: () => Promise<void>;
+}
 
-const useMinecraftVersionStore = create<MinecraftVersionStore>((setter) => ({
-  versions: undefined,
-  setVersions: (versions: string[]) => {
-    setter((state: MinecraftVersionStore) => ({ ...state, versions }));
-  },
-  loadVersions: async () => {
-    const versions: string[] = await window.ipcRenderer.invoke(
-      "app:list-minecraft-versions",
-    );
-    setter((state: MinecraftVersionStore) => ({ ...state, versions }));
-  },
+const useMinecraftVersionStore = create<MinecraftVersionStore>((set) => ({
+  // State initialization
+  versions: initialLoadable<string[]>([]),
+
+  // Action definition using the generic helper
+  loadVersions: createIpcAction<MinecraftVersionStore, string[]>(
+    set,
+    "versions",
+    "app:list-minecraft-versions",
+  ),
 }));
 
 export default useMinecraftVersionStore;

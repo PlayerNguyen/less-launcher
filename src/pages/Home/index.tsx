@@ -5,6 +5,9 @@ import { BiNews, BiPlay } from "react-icons/bi";
 import Tabs from "@src/components/ui/Tabs";
 import clsx from "clsx";
 import { useSettingStore } from "@src/stores/settings.store";
+import useProfileStore from "@src/stores/ProfileStore";
+import { useEffect } from "react";
+import { SplashCreateProfileScreen } from "./SplashCreateProfile";
 
 /**
  * @deprecated this is the old component and will be removed in the next release
@@ -65,5 +68,18 @@ import { useSettingStore } from "@src/stores/settings.store";
 // }
 
 export default function Home() {
-  return <>Hi</>;
+  const { profiles, loadProfiles } = useProfileStore();
+
+  useEffect(() => {
+    if (!profiles.data) {
+      loadProfiles();
+    }
+  }, [loadProfiles]);
+
+  // Display that no profile found
+  if (profiles && (!profiles.data || profiles.data.length == 0)) {
+    return <SplashCreateProfileScreen />;
+  }
+
+  return <>{JSON.stringify(profiles.data)}</>;
 }

@@ -33,6 +33,10 @@
   /* Side bar items */
   --sidebar-item-bg-hover: #434343;
   --sidebar-item-color-text: var(--brand-3);
+
+  /* Text colors */
+  --text-dim: #555555;
+  --text-dimmer: #333333;
 }
 
 .active {
