@@ -5,6 +5,7 @@ import { ProfileGameType } from "@packages/profile/enum";
 import { createProfile } from "@packages/profile/service";
 import { IpcMainInvokeEvent } from "electron";
 import z from "zod/v4";
+import log from "electron-log";
 
 /**
  * Defines the expected structure and validation rules for creating a new profile.
@@ -24,6 +25,7 @@ export class CreateProfileHandler implements IpcHandler {
   channel: string = "app:create-profile";
 
   async listener(_: IpcMainInvokeEvent, profileItem: ProfileItem) {
+    log.info("Requesting to create a new profile");
     const response = z.safeParse(CreateProfileHandlerSchema, profileItem);
 
     // If invalid body

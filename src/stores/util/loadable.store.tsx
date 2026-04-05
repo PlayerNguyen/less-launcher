@@ -33,6 +33,7 @@ export const createLoadableAction = <S, T>(
 ) => {
   return async (promise: Promise<T>) => {
     // 1. Start Loading
+    console.log(`[LoadableAction] Set loading to current action`);
     set(
       (state) =>
         ({

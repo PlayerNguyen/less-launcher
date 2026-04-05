@@ -24,5 +24,12 @@
   "home": {
     "no_profile": "No profile was created. You will need to create a new profile to play.",
     "create_new_profile": "Create new profile"
+  },
+  "change_profile_modal": {
+    "name": "Profile name",
+    "create": "Create"
+  },
+  "validations": {
+    "not_empty": "This value is required"
   }
 }

@@ -125,6 +125,20 @@ app.whenReady().then(() => {
 
   const menu = Menu.buildFromTemplate([
     {
+      label: "Edit",
+      submenu: [
+        { role: "undo" },
+        { role: "redo" },
+        { type: "separator" },
+        { role: "cut" },
+        { role: "copy" },
+        { role: "paste" },
+        { role: "delete" },
+        { type: "separator" },
+        { role: "selectAll" }, 
+      ],
+    },
+    {
       label: "Menu",
       // @ts-expect-error types do not perfectly align
       submenu: [...debuggerMenu(win), ...fileMenu],

@@ -11,7 +11,7 @@ import { ExtractInnerProps, GenericModalProps } from "../type";
 import { Modal, ModalProps } from "@mantine/core";
 
 export function createModalsManager<
-  Registry extends Record<string, React.ComponentType<any>>,
+  Registry extends Record<string, ComponentType<GenericModalProps<any>>>,
 >() {
   /**
    * Declare list of keys taken in the registry key

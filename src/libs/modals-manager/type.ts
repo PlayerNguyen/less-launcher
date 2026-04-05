@@ -1,3 +1,5 @@
+import { ComponentProps, ComponentType } from "react";
+
 export type ModalPropsContext = {
   closeModal: () => void;
 };
@@ -17,4 +19,8 @@ export type GenericModalProps<T> = {
  * out of a component's props definition.
  */
 export type ExtractInnerProps<T> =
-  T extends GenericModalProps<infer P> ? P : unknown;
+  T extends ComponentType<any>
+    ? ComponentProps<T> extends GenericModalProps<infer P>
+      ? P
+      : never
+    : never;
