@@ -1,4 +1,4 @@
-import { Button, Stack, StackProps, Text } from "@mantine/core";
+import { Stack, StackProps } from "@mantine/core";
 import { BiCog } from "react-icons/bi";
 import { LuDock } from "react-icons/lu";
 import useSidebarStore from "@src/stores/sidebar.store";
@@ -49,6 +49,7 @@ export default function Sidebar({ wrapperProps, className }: SidebarProps) {
         {menuItems.map((item) => {
           return (
             <SidebarItem
+              key={item.path}
               icon={item.icon}
               label={item.title}
               active={location.pathname === item.path}

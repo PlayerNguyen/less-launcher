@@ -26,7 +26,8 @@
     "paths": {
       "@packages/*": ["./packages/*"],
       "@src/*": ["./src/*"],
-      "@electron/*": ["./electron/*"]
+      "@electron/*": ["./electron/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": ["src", "electron"],

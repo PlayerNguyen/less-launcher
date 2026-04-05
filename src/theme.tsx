@@ -88,7 +88,7 @@ const theme = createTheme({
   luminanceThreshold: 0.23,
   components: {
     // Button: ButtonTheme,
-    ActionIcon: ActionIconTheme,
+    // ActionIcon: ActionIconTheme,
   },
   activeClassName: "active",
 });

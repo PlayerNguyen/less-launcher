@@ -1,0 +1,18 @@
+{
+  "onboarding": {
+    "introduce": "Welcome to Less Launcher. To enjoy the game, select the in-game name before start. Don't worry, you can change it later on.",
+    "ingame": "In-game Name",
+    "language": "Language",
+    "consent_tac": "I have read and agreed with the <link>Terms and Conditions</link>",
+    "complete": "Complete",
+    "validation": {
+      "min_length": "Username must be at least {{count}} characters",
+      "max_length": "Username cannot exceed {{count}} characters",
+      "invalid_format": "Only letters, numbers, and underscores are allowed",
+      "terms_required": "You must agree with Terms and Conditions"
+    }
+  },
+  "language_picker": {
+    "label": "Language"
+  }
+}

@@ -1,11 +1,19 @@
 import { createMemoryRouter } from "react-router";
-import HomeLayout from "./components/layout/HomeLayout";
+import AppLayout from "./components/layout/AppLayout";
 import Home from "./pages/Home";
+import { appModals, ModalProvider } from "./configs/configureModals";
 
 const router = createMemoryRouter([
   {
     path: "/",
-    element: <HomeLayout />,
+    element: (
+      // Put the provider here
+      // to make sure the app can use <Link /> and
+      // other stuff inside modals
+      <ModalProvider registry={appModals}>
+        <AppLayout />
+      </ModalProvider>
+    ),
     children: [
       {
         index: true,

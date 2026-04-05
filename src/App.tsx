@@ -3,6 +3,7 @@ import "@fontsource/inter";
 import "@fontsource-variable/roboto-mono";
 import "./themes.css";
 import "./App.css";
+import "@src/configs/configureLanguage";
 
 import { MantineProvider } from "@mantine/core";
 import { RouterProvider } from "react-router/dom";
