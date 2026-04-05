@@ -18,6 +18,7 @@
     "@mantine/core": "^8.3.15",
     "@mantine/form": "^9.0.0",
     "@mantine/hooks": "^8.3.15",
+    "@paralleldrive/cuid2": "^3.3.0",
     "clsx": "^2.1.1",
     "electron-log": "^5.4.3",
     "extract-zip": "^2.0.1",

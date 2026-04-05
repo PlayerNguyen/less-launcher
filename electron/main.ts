@@ -11,7 +11,10 @@ import { ConfigContext } from "@packages/config";
 import { LauncherMetadata } from "./configs/launcher-metadata";
 import { LauncherConfig } from "./configs/config";
 import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
+import { ProfileConfigIntent, LauncherProfile } from "@packages/profile";
 import log from "electron-log/main";
+import { GetProfilesHandler } from "./ipc-handler/profile";
+import { CreateProfileHandler } from "./ipc-handler/profile/create-profile";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -71,9 +74,12 @@ function createWindow() {
   }
 
   // Load ipc handler context
-  getIpcHandlerContext().registerHandler(new DevDownloadVersionHandler());
-  getIpcHandlerContext().registerHandler(new ListMinecraftVersionsHandler());
-  getIpcHandlerContext().registerHandler(new RunMinecraftHandler(win));
+  getIpcHandlerContext()
+    .registerHandler(new DevDownloadVersionHandler())
+    .registerHandler(new ListMinecraftVersionsHandler())
+    .registerHandler(new RunMinecraftHandler(win))
+    .registerHandler(new GetProfilesHandler())
+    .registerHandler(new CreateProfileHandler());
 
   getIpcHandlerContext()
     .loadAllHandlers()
@@ -112,6 +118,7 @@ app.whenReady().then(() => {
     new LauncherMetadata(),
   );
   ConfigContext.initialize(RuntimeConfigIntent, new RuntimeConfig());
+  ConfigContext.initialize(ProfileConfigIntent, new LauncherProfile());
 
   // Create init window
   createWindow();

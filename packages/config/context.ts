@@ -1,5 +1,6 @@
 import { JsonConfigObject } from "./config-json";
 import { ConfigIntent } from "./types";
+import log from "electron-log/main";
 
 export class ConfigContext {
   // Store multiple instances keyed by their filename or a custom ID
@@ -13,6 +14,7 @@ export class ConfigContext {
     intent: ConfigIntent<T>,
     defaultValue: T,
   ): JsonConfigObject<T> {
+    log.info(`Initializing config intent: ${intent.fileName}`);
     if (this.instances.has(intent.fileName)) {
       return this.instances.get(intent.fileName) as JsonConfigObject<T>;
     }

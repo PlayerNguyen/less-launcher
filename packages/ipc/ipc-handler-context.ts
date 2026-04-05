@@ -6,6 +6,7 @@ export class IpcHandlerContext {
 
   registerHandler(handler: IpcHandler) {
     this.handlers.set(handler.channel, handler);
+    return this;
   }
 
   unregisterHandler(handler: IpcHandler) {

@@ -1,0 +1,11 @@
+{
+  "name": "@packages/profile",
+  "description": "Profile part for the launcher",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "dependencies": {
+    "@packages/fs": "file:../fs",
+    "@packages/config": "file:../config"
+  }
+}
