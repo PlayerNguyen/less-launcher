@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "@mantine/core";
+import { Divider, Flex, Stack, StackProps } from "@mantine/core";
 import { BiCog } from "react-icons/bi";
 import { LuDock } from "react-icons/lu";
 import useSidebarStore from "@src/stores/sidebar.store";
@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router";
 import { SidebarItem } from "./components/Item";
 import { SidebarGroupDivider } from "./components/SidebarGroupDivider";
 import { SidebarProfileSection } from "./components/SidebarProfileSection";
+import { useTranslation } from "react-i18next";
 
 export type SidebarProps = {
   wrapperProps?: StackProps;
@@ -14,21 +15,22 @@ export type SidebarProps = {
 };
 
 export default function Sidebar({ wrapperProps, className }: SidebarProps) {
+  const { t } = useTranslation();
   const { isCompact } = useSidebarStore();
   const navigate = useNavigate();
   const location = useLocation();
   // const { toggleColorScheme, colorScheme } = useMantineColorScheme();
 
-  const iconSize = isCompact ? "1.4em" : "0.8rem";
+  const iconSize = isCompact ? "1.4em" : "1rem";
   const menuItems = [
     {
       icon: <LuDock size={iconSize} />,
-      title: "Home",
+      title: t("sidebar.home"),
       path: "/",
     },
     {
       icon: <BiCog size={iconSize} />,
-      title: "Settings",
+      title: t("sidebar.settings"),
       description: "Launcher settings",
       path: "/settings",
     },
@@ -58,9 +60,11 @@ export default function Sidebar({ wrapperProps, className }: SidebarProps) {
           );
         })}
       </div>
-      <div className="sidebar-block mb-8">
+
+      <Flex className="sidebar-block mb-8" gap={"sm"} direction={"column"}>
+        <Divider />
         <SidebarProfileSection />
-      </div>
+      </Flex>
     </Stack>
   );
 }

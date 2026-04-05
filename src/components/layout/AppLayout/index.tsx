@@ -5,11 +5,16 @@ import clsx from "clsx";
 import { useEffect } from "react";
 import useOnboardingStore from "@src/stores/OnboardingStore";
 import { useModal } from "@src/configs/configureModals";
+import { Outlet } from "react-router";
 
 export default function AppLayout() {
-  const { hasCompletedOnboarding, completeOnboarding } = useOnboardingStore();
+  const { hasCompletedOnboarding } = useOnboardingStore();
   const { openModal } = useModal();
 
+  /**
+   * Display onboarding modal when user
+   * has not been setup
+   */
   useEffect(() => {
     if (!hasCompletedOnboarding) {
       openModal({
@@ -42,11 +47,11 @@ export default function AppLayout() {
               <Flex className="flex-1">
                 <div
                   className={clsx(
-                    `bg-(--bg-dark-secondary) rounded-xl p-4`,
+                    `bg-(--bg-dark-secondary) rounded-xl`,
                     `overflow-auto mx-4 flex-1 mb-8`,
                   )}
                 >
-                  Content go here
+                  <Outlet />
                 </div>
               </Flex>
             </Flex>

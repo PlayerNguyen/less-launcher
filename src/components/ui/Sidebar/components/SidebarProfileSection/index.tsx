@@ -1,19 +1,14 @@
-import {
-  Avatar,
-  Flex,
-  Menu,
-  Popover,
-  Text,
-  UnstyledButton,
-} from "@mantine/core";
+import { Avatar, Flex, Menu, Text, UnstyledButton } from "@mantine/core";
+import { useSettingStore } from "@src/stores/settings.store";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
+import { LuPen } from "react-icons/lu";
 
 export function SidebarProfileSection() {
+  const { lastPlayedVersion, lastUsername } = useSettingStore();
+  const { t } = useTranslation();
   return (
-    <Menu
-      arrowOffset={4}
-      transitionProps={{ transition: "slide-up", duration: 180 }}
-    >
+    <Menu offset={12} transitionProps={{ transition: "pop", duration: 180 }}>
       <Menu.Target>
         <UnstyledButton
           component="div"
@@ -25,13 +20,18 @@ export function SidebarProfileSection() {
         >
           <Avatar name={"Less Launcher"} />
           <Flex direction={"column"}>
-            <Text fw={"bold"}>Player_Name</Text>
+            <Text fw={"300"}>{lastUsername ?? "Unknown player"}</Text>
+            <Text fw={"bolder"} size="xs">
+              {lastPlayedVersion?.value ?? "-"}
+            </Text>
           </Flex>
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown w={"200"}>
-        <Menu.Label>Update new case</Menu.Label>
-        <Menu.Item>Hi</Menu.Item>
+        <Menu.Label>{t("sidebar.profile")}</Menu.Label>
+        <Menu.Item leftSection={<LuPen />}>
+          {t("sidebar.change_username")}
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

@@ -18,18 +18,22 @@ export function SidebarItem({
 }: SidebarItemProps) {
   return (
     <Button
-      size="compact-xl"
+      size="compact-lg"
       leftSection={icon}
       variant={active ? "light" : "transparent"}
       justify="left"
       className={clsx(
         "transition-all duration-200 cubic-bezier(0.34, 1.56, 0.64, 1)",
-        "hover:bg-(--brand-1)/20",
+        "hover:bg-(--brand-1)/10",
+        "text-(--border-lighter)",
+        { "text-(--brand-4)": active },
         className,
       )}
       {...others}
     >
-      <Text className={clsx("font-normal")}>{label}</Text>
+      <Text size="sm" className={clsx({ "font-semibold": active })}>
+        {label}
+      </Text>
     </Button>
   );
 }

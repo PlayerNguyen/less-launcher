@@ -1,4 +1,5 @@
 import { Text } from "@mantine/core";
+import { useOperatingSystem } from "@src/libs/operating-system";
 import clsx from "clsx";
 
 export type SafeAreaProps = {
@@ -15,15 +16,24 @@ export function SafeArea({
   className,
   innerClassName,
 }: SafeAreaProps) {
+  const { isMac, isWindows } = useOperatingSystem();
   return (
     <div className={clsx("app-content-safe-area", className)}>
       <div
         className={clsx(
           "app-content-title-bar bg-header h-12 [-webkit-app-region:drag] px-8 py-2",
+          { "ml-15": isMac, "mr-11.5": isWindows },
         )}
       >
         {/* TODO: Dynamic renderer */}
-        <Text fw={"bolder"} size="xs" className={"uppercase"} c={"primary.3"}>
+        <Text
+          fw={"bolder"}
+          size="xs"
+          className={clsx(
+            "uppercase",
+            "hover:text-(--brand-7) hover:bg-red-50",
+          )}
+        >
           Less
         </Text>
       </div>

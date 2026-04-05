@@ -13,5 +13,11 @@
   },
   "language_picker": {
     "label": "Ngôn ngữ"
+  },
+  "sidebar": {
+    "profile": "Hồ sơ",
+    "change_username": "Đổi tên người chơi",
+    "home": "Trang chủ",
+    "settings": "Cài đặt"
   }
 }

@@ -14,5 +14,11 @@
   },
   "language_picker": {
     "label": "Language"
+  },
+  "sidebar": {
+    "profile": "Profile",
+    "change_username": "Change name",
+    "home": "Home",
+    "settings": "Settings"
   }
 }
