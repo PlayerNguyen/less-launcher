@@ -32,7 +32,6 @@ export const createLoadableAction = <S, T>(
   key: keyof S,
 ) => {
   return async (promise: Promise<T>) => {
-    // 1. Start Loading
     console.log(`[LoadableAction] Set loading to current action`);
     set(
       (state) =>
@@ -46,7 +45,9 @@ export const createLoadableAction = <S, T>(
     );
 
     try {
-      // 2. Handle Success
+      console.info(
+        `[LoadableAction] Successfully fetch data for loadable action`,
+      );
       const data = await promise;
       set(
         () =>
@@ -55,7 +56,6 @@ export const createLoadableAction = <S, T>(
           }) as Partial<S>,
       );
     } catch (error) {
-      // 3. Handle Failure
       set(
         () =>
           ({

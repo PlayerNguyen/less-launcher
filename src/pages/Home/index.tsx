@@ -74,7 +74,7 @@ export default function Home() {
     if (!profiles.data) {
       loadProfiles();
     }
-  }, [loadProfiles]);
+  }, [loadProfiles, profiles.data]);
 
   // Display that no profile found
   if (profiles && (!profiles.data || profiles.data.length == 0)) {

@@ -7,14 +7,14 @@ import {
 } from "../util/loadable.store";
 
 interface ProfileStore {
-  profiles: Loadable<ProfileItem[]>;
+  profiles: Loadable<ProfileItem[] | undefined>;
   loadProfiles: () => Promise<void>;
   reset: () => void;
 }
 
 const useProfileStore = create<ProfileStore>((set) => ({
   // Initialize using the generic helper
-  profiles: initialLoadable([]),
+  profiles: initialLoadable(undefined),
 
   // Create the action using the utility
   loadProfiles: createIpcAction<ProfileStore, ProfileItem[]>(

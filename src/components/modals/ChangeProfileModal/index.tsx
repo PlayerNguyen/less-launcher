@@ -17,7 +17,6 @@ import { VersionSelectBox } from "@src/components/ui/VersionSelectBox";
 import { createChangeProfileModalFormValuesSchema } from "./schema";
 import { ProfileItem } from "@packages/profile/config";
 import { ProfileGameType } from "@packages/profile/enum";
-import { ipcRenderer } from "electron";
 
 export type ChangeProfileModalProps = GenericModalProps<{
   profileId?: string;

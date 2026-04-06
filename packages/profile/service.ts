@@ -1,6 +1,7 @@
 import { ConfigContext } from "@packages/config";
 import { ProfileConfigIntent, ProfileItem } from "./config";
 import { ProfileGameType } from "./enum";
+import log from "electron-log";
 
 /**
  * Retrieves all profiles that the user has created.
@@ -23,6 +24,7 @@ export function createProfile(profileItem: ProfileItem) {
   profileConfig.set({
     items: appendedList,
   });
+  log.info(`Successfully created a new game profile: ${profileItem.id}`);
 }
 
 /**
