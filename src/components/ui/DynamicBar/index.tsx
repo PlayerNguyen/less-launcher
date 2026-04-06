@@ -1,3 +1,7 @@
+import { useBarContext } from "@src/libs/dynamic-bar/hooks";
+
 export function DynamicBar() {
-  return <>Dynamic Bar</>;
+  const { config } = useBarContext();
+
+  return <>{config.actions}</>;
 }

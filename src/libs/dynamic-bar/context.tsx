@@ -1,12 +1,12 @@
 import React, { createContext, useState } from "react";
 
-interface BarConfig {
+export interface BarConfig {
   actions?: React.ReactNode;
 }
 
-const BarContext = createContext<{
+export const BarContext = createContext<{
   config: BarConfig;
-  setConfig: (config: BarConfig) => void;
+  setConfig: (config: BarConfig | ((prev: BarConfig) => BarConfig)) => void;
 } | null>(null);
 
 export const BarProvider = ({ children }: { children: React.ReactNode }) => {
