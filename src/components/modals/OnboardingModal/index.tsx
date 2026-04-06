@@ -9,7 +9,8 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { schemaResolver, useForm } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { zod4Resolver } from "mantine-form-zod-resolver";
 import { LanguagePicker } from "@src/components/ui/LanguageSelect";
 import { GenericModalProps } from "@src/libs/modals-manager/type";
 import { Trans, useTranslation } from "react-i18next";
@@ -33,7 +34,7 @@ export function OnboardingModal({ context }: OnboardingModalProps) {
       ingameName: "",
       consentTerms: false,
     },
-    validate: schemaResolver(createOnboardingSchema(t)),
+    validate: zod4Resolver(createOnboardingSchema(t)),
   });
 
   const handleLinkClick = () => {

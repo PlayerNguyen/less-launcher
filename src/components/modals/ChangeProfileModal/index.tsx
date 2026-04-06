@@ -7,7 +7,8 @@ import {
   SegmentedControl,
   TextInput,
 } from "@mantine/core";
-import { schemaResolver, useForm } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import {zod4Resolver} from 'mantine-form-zod-resolver'
 import { AppGenerators } from "@src/configs/configureGenerator";
 import { GenericModalProps } from "@src/libs/modals-manager/type";
 import { useTranslation } from "react-i18next";
@@ -37,7 +38,7 @@ export function ChangeProfileModal({
       name: "",
       version: "",
     },
-    validate: schemaResolver(createChangeProfileModalFormValuesSchema(t)),
+    validate: zod4Resolver(createChangeProfileModalFormValuesSchema(t)),
   });
 
   const handleSetRandomName = () => {
