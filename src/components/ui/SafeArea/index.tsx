@@ -30,21 +30,14 @@ export function SafeArea({
       >
         {/* Title section */}
         <div className={clsx("app-content-safe-area-title-bar w-52")}>
-          <Text
-            fw={"bolder"}
-            size="xs"
-            className={clsx(
-              "uppercase",
-              "hover:text-(--brand-7) hover:bg-red-50",
-            )}
-          >
+          <Text fw={"bolder"} size="xs" className={clsx("uppercase")}>
             Less
           </Text>
         </div>
         {/* Dynamic section */}
         <div
           className={clsx(
-            "app-content-safe-area-dynamic-bar flex-1",
+            "app-content-safe-area-dynamic-bar flex-1 overflow-hidden",
           )}
         >
           <DynamicBar />
