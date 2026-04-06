@@ -42,7 +42,11 @@ export function SafeArea({
           </Text>
         </div>
         {/* Dynamic section */}
-        <div className={clsx("app-content-safe-area-dynamic-bar flex-1")}>
+        <div
+          className={clsx(
+            "app-content-safe-area-dynamic-bar flex-1",
+          )}
+        >
           <DynamicBar />
         </div>
       </div>

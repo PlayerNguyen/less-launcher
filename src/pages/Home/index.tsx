@@ -1,12 +1,14 @@
 import useProfileStore from "@src/stores/ProfileStore";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { SplashCreateProfileScreen } from "./SplashCreateProfile";
 import { usePageAction } from "@src/libs/dynamic-bar/hooks";
+import { HomePageAction } from "./HomePageAction";
 
 export default function Home() {
   const { profiles, loadProfiles } = useProfileStore();
 
-  usePageAction("Home");
+  const pageAction = useMemo(() => <HomePageAction />, []);
+  usePageAction(pageAction);
 
   useEffect(() => {
     if (!profiles.data) {
