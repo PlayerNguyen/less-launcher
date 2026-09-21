@@ -35,7 +35,7 @@ export class ArgumentBuilder {
       "natives",
     );
 
-    this.buildLibraries(versionId);
+    this.buildLibraries();
 
     return this;
   }
@@ -61,7 +61,7 @@ export class ArgumentBuilder {
 
     this.argument.version.assets = version.assets || "";
 
-    this.buildLibraries(versionId);
+    this.buildLibraries();
 
     return this;
   }
@@ -76,7 +76,7 @@ export class ArgumentBuilder {
     return this;
   }
 
-  private buildLibraries(versionId: string) {
+  private buildLibraries() {
     const librariesDir = path.resolve(getMinecraftDirectory(), "libraries");
     const stack = [];
     stack.push(librariesDir);

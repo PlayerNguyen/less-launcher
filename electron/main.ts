@@ -110,7 +110,7 @@ app.whenReady().then(() => {
     {
       label: "Menu",
       // @ts-expect-error types do not perfectly align
-      submenu: [...debuggerMenu(win), ...fileMenu],
+      submenu: [...debuggerMenu(), ...fileMenu],
     },
   ]);
   Menu.setApplicationMenu(menu);

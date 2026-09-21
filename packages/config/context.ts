@@ -3,7 +3,7 @@ import { ConfigIntent } from "./types";
 
 export class ConfigContext {
   // Store multiple instances keyed by their filename or a custom ID
-  private static instances = new Map<string, JsonConfigObject<any>>();
+  private static instances = new Map<string, JsonConfigObject<unknown>>();
 
   /**
    * Initializes a specific configuration.
@@ -20,7 +20,7 @@ export class ConfigContext {
     const config = JsonConfigObject.create<T>(intent.fileName);
     config.loadOrDefault(defaultValue);
 
-    this.instances.set(intent.fileName, config);
+    this.instances.set(intent.fileName, config as JsonConfigObject<unknown>);
     return config;
   }
 
