@@ -6,6 +6,8 @@ Less Launcher resolves Minecraft versions, downloads game resources, provisions 
 
 > This project is under active development. APIs, file layout, and behavior may change between releases.
 
+> **Disclaimer:** Less Launcher is an unofficial, community-made project. It is **not** affiliated with, endorsed by, or associated with Mojang Studios, Microsoft, or the game **Minecraft**. "Minecraft" and related marks are trademarks of Mojang AB/Microsoft. All game assets and content remain the property of their respective owners.
+
 ## Features
 
 - Browse and resolve Minecraft versions from the official Mojang manifest.
