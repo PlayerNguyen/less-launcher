@@ -24,59 +24,69 @@ const pathAliases = {
 };
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  resolve: {
-    alias: pathAliases,
-  },
-  plugins: [
-    tailwindcss(),
-    react(),
-    electron({
-      main: {
-        entry: "electron/main.ts",
-        vite: {
-          resolve: {
-            alias: pathAliases,
-          },
-        },
-      },
-      preload: {
-        input: path.join(__dirname, "electron/preload.ts"),
-        vite: {
-          resolve: {
-            alias: pathAliases,
-          },
-        },
-      },
-      renderer: process.env.NODE_ENV === "test" ? undefined : {},
-    }),
-  ],
-  test: {
-    projects: [
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({
-            configDir: path.join(dirname, ".storybook"),
-          }),
-        ],
-        test: {
-          name: "storybook",
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: playwright({}),
-            instances: [
-              {
-                browser: "chromium",
+export default defineConfig(({ mode }) => {
+  const isTest = mode === "test" || process.env.NODE_ENV === "test";
+
+  return {
+    resolve: {
+      alias: pathAliases,
+    },
+    plugins: [
+      tailwindcss(),
+      react(),
+      // The Electron plugin must not run during tests: it builds the main
+      // process and spawns Electron, which requires a display.
+      ...(isTest
+        ? []
+        : [
+            electron({
+              main: {
+                entry: "electron/main.ts",
+                vite: {
+                  resolve: {
+                    alias: pathAliases,
+                  },
+                },
               },
-            ],
-          },
-          setupFiles: [".storybook/vitest.setup.ts"],
-        },
-      },
+              preload: {
+                input: path.join(__dirname, "electron/preload.ts"),
+                vite: {
+                  resolve: {
+                    alias: pathAliases,
+                  },
+                },
+              },
+              renderer: {},
+            }),
+          ]),
     ],
-  },
+    test: {
+      projects: [
+        {
+          extends: true,
+          plugins: [
+            // The plugin will run tests for the stories defined in your Storybook config
+            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+            storybookTest({
+              configDir: path.join(dirname, ".storybook"),
+            }),
+          ],
+          test: {
+            name: "storybook",
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: playwright({}),
+              instances: [
+                {
+                  browser: "chromium",
+                },
+              ],
+            },
+            setupFiles: [".storybook/vitest.setup.ts"],
+          },
+        },
+      ],
+    },
+  };
 });

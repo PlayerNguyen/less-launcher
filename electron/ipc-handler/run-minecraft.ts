@@ -26,10 +26,9 @@ export class RunMinecraftHandler implements IpcHandler {
       throw new Error(`Username must be filled to start minecraft`);
     }
 
-    runMinecraft(
-      lastPlayedVersion?.value,
-      { type: "offline", username: lastUsername },
-      this.browserWindow,
-    );
+    runMinecraft(lastPlayedVersion?.value, {
+      type: "offline",
+      username: lastUsername,
+    });
   };
 }

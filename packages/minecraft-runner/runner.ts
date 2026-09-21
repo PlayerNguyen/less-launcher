@@ -11,7 +11,6 @@ import { ArgumentBuilder } from "./arg-helper";
 import { spawn } from "child_process";
 import path from "path";
 import { RunnerArgument } from "./runner-argument";
-import { BrowserWindow } from "electron";
 import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 import { getAdoptiumExecutePath } from "@packages/runtime/adoptium";
 import { ArgumentAuth, MinecraftRunOptions } from "./types";
@@ -61,7 +60,6 @@ async function covertAuthArgument(options: MinecraftRunOptions) {
 export async function runMinecraft(
   versionId: string,
   options: MinecraftRunOptions,
-  window?: BrowserWindow,
 ) {
   const versionInfo = await getVersionInfo(versionId);
   const versionDetail = await getVersionDetails(versionInfo);
