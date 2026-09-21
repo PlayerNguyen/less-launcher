@@ -24,7 +24,7 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@packages/*": ["./packages/*"],
+      "@packages/*": ["./packages/*/src"],
       "@src/*": ["./src/*"],
       "@electron/*": ["./electron/*"]
     }

@@ -2,7 +2,7 @@
   "name": "@packages/config",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "dependencies": {
     "@packages/fs": "file:../fs"
   }

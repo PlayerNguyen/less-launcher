@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import path from "node:path";
 import { getMinecraftDirectory } from "@packages/fs";
-import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
+import { getSystemCriteria } from "@packages/minecraft-manifest-rules";
 import {
   downloadResources,
   findVersionInfo,
@@ -9,8 +9,7 @@ import {
   resolveResources,
   type Version,
 } from "@packages/minecraft-version-resolver";
-import { setupJavaRuntime } from "@packages/runtime";
-import { getAdoptiumExecutePath } from "@packages/runtime/adoptium";
+import { getAdoptiumExecutePath, setupJavaRuntime } from "@packages/runtime";
 import log from "electron-log";
 import { ArgumentBuilder } from "./arg-helper";
 import type { RunnerArgument } from "./runner-argument";

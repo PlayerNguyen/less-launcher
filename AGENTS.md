@@ -40,7 +40,7 @@ Always run `npm run lint` and `npm run test` after making changes. Before a full
 
 ### Local Packages (`packages/`)
 
-TypeScript project references — pure, reusable logic:
+TypeScript project references — pure, reusable logic. Each package keeps its sources in `src/` and exposes a public barrel at `src/index.ts` (imported as `@packages/<name>`):
 
 - `config` — typed configuration context.
 - `fs` — OS-aware paths (`getMinecraftDirectory`, app data, resources).
@@ -70,7 +70,7 @@ Packages compile to `dist-electron-packages/` and the app consumes their `.d.ts`
 
 Use these consistently — do not introduce relative `../../` imports across boundaries:
 
-- `@packages/*` → `./packages/*`
+- `@packages/*` → `./packages/*/src` (each package exposes a barrel at `src/index.ts`)
 - `@src/*` → `./src/*`
 - `@electron/*` → `./electron/*`
 - `@components/*` → `./src/components/*` (Vite alias)

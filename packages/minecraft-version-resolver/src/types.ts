@@ -2,7 +2,7 @@ import type {
   Arch,
   ConditionalArgument,
   OperatingSystem,
-} from "@packages/minecraft-manifest-rules/types";
+} from "@packages/minecraft-manifest-rules";
 
 export interface VersionManifest {
   latest: {

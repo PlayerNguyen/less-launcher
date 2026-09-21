@@ -63,15 +63,15 @@
     },
     {
       "includes": [
-        "packages/minecraft-runner/runner-argument.ts",
-        "packages/minecraft-version-resolver/resolver.ts"
+        "packages/minecraft-runner/src/runner-argument.ts",
+        "packages/minecraft-version-resolver/src/resolver.ts"
       ],
       "linter": {
         "rules": { "suspicious": { "noTemplateCurlyInString": "off" } }
       }
     },
     {
-      "includes": ["packages/ipc/types.ts"],
+      "includes": ["packages/ipc/src/types.ts"],
       "linter": { "rules": { "suspicious": { "noExplicitAny": "off" } } }
     },
     {

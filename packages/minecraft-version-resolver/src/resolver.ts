@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { getVersionPath } from "@packages/fs";
-import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
-import { shouldAcceptRule } from "@packages/minecraft-manifest-rules/resolver";
+import {
+  getSystemCriteria,
+  shouldAcceptRule,
+} from "@packages/minecraft-manifest-rules";
 import type {
   AssetIndex,
   Library,

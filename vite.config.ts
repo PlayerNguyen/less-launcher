@@ -18,12 +18,18 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 
 // Shares accross all build environments
-const pathAliases = {
-  "@packages": path.resolve(__dirname, "./packages"),
-  "@src": path.resolve(__dirname, "./src"),
-  "@components": path.resolve(__dirname, "./src/components"),
-  "@electron": path.resolve(__dirname, "./electron"),
-};
+const pathAliases = [
+  {
+    find: /^@packages\/(.+)$/,
+    replacement: path.resolve(__dirname, "packages/$1/src"),
+  },
+  { find: "@src", replacement: path.resolve(__dirname, "./src") },
+  {
+    find: "@components",
+    replacement: path.resolve(__dirname, "./src/components"),
+  },
+  { find: "@electron", replacement: path.resolve(__dirname, "./electron") },
+];
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
