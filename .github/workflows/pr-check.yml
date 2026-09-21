@@ -32,6 +32,9 @@ jobs:
       - name: Build Packages (tsc -b)
         run: npm run build:packages
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
       - name: Run Tests
         run: npm run test -- --run
 

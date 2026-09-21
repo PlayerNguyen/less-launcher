@@ -5,6 +5,7 @@ import "@fontsource-variable/inter";
 
 import type { Preview } from "@storybook/react";
 import { MantineProvider } from "@mantine/core";
+import { withRouter } from "storybook-addon-remix-react-router";
 import theme from "../src/theme";
 
 const preview: Preview = {
@@ -25,6 +26,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    withRouter,
     (Story) => (
       <MantineProvider defaultColorScheme="dark" theme={theme}>
         <Story />
