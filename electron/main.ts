@@ -1,10 +1,10 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ConfigContext } from "@packages/config";
-import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
+import { getIpcHandlerContext } from "@packages/ipc";
+import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime";
 import { app, BrowserWindow, Menu } from "electron";
 import log from "electron-log/main";
-import { getIpcHandlerContext } from "../packages/ipc";
 import { LauncherConfig } from "./configs/config";
 import { LauncherMetadata } from "./configs/launcher-metadata";
 import { DevDownloadVersionHandler } from "./ipc-handler/dev-download-version";

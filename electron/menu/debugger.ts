@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { runMinecraft } from "@packages/minecraft-runner/runner";
+import { runMinecraft } from "@packages/minecraft-runner";
 import { getLatestVersions } from "@packages/minecraft-version-resolver";
 import { MenuItem } from "electron";
 

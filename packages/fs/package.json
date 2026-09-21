@@ -2,5 +2,5 @@
   "name": "@packages/fs",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.ts"
+  "main": "src/index.ts"
 }

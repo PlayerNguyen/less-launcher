@@ -111,7 +111,7 @@ less-launcher/
 
 | Alias          | Target        | Defined in          |
 | -------------- | ------------- | ------------------- |
-| `@packages/*`  | `./packages/*`| Vite, tsconfig, pkg |
+| `@packages/*`  | `./packages/*/src` | Vite, tsconfig, pkg |
 | `@src/*`       | `./src/*`     | Vite, tsconfig      |
 | `@electron/*`  | `./electron/*`| Vite, tsconfig      |
 | `@components/*`| `./src/components/*` | Vite          |

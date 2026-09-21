@@ -1,9 +1,9 @@
 import path from "node:path";
-import { pickValue } from "@packages/minecraft-manifest-rules/resolver";
 import type {
   ConditionalArgument,
   Criteria,
-} from "@packages/minecraft-manifest-rules/types";
+} from "@packages/minecraft-manifest-rules";
+import { pickValue } from "@packages/minecraft-manifest-rules";
 import type { Version } from "@packages/minecraft-version-resolver";
 import type { Argument, RunnerArgumentBuildOptions } from "./types";
 
