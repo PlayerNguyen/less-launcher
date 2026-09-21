@@ -1,20 +1,20 @@
+import { spawn } from "node:child_process";
+import path from "node:path";
+import { getMinecraftDirectory } from "@packages/fs";
+import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 import {
   downloadResources,
   findVersionInfo,
   getVersionDetails,
   resolveResources,
-  Version,
+  type Version,
 } from "@packages/minecraft-version-resolver";
-import { getMinecraftDirectory } from "@packages/fs";
 import { setupJavaRuntime } from "@packages/runtime";
-import { ArgumentBuilder } from "./arg-helper";
-import { spawn } from "child_process";
-import path from "path";
-import { RunnerArgument } from "./runner-argument";
-import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 import { getAdoptiumExecutePath } from "@packages/runtime/adoptium";
-import { ArgumentAuth, MinecraftRunOptions } from "./types";
 import log from "electron-log";
+import { ArgumentBuilder } from "./arg-helper";
+import type { RunnerArgument } from "./runner-argument";
+import type { ArgumentAuth, MinecraftRunOptions } from "./types";
 
 async function getVersionInfo(versionId: string) {
   const versionInfo = await findVersionInfo(versionId);

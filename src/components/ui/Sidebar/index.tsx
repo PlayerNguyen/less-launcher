@@ -3,28 +3,27 @@ import {
   Center,
   Group,
   Stack,
-  StackProps,
-  StyleProp,
+  type StackProps,
+  type StyleProp,
   Text,
   useMantineColorScheme,
 } from "@mantine/core";
-import {
-  BiPlay,
-  BiLeftArrow,
-  BiRightArrow,
-  BiCog,
-  BiSun,
-  BiMoon,
-} from "react-icons/bi";
-import SidebarGroupItem from "../SidebarGroupItem";
 import useSidebarStore from "@src/stores/sidebar.store";
 import clsx from "clsx";
+import {
+  BiCog,
+  BiLeftArrow,
+  BiMoon,
+  BiPlay,
+  BiRightArrow,
+  BiSun,
+} from "react-icons/bi";
 import { useLocation, useNavigate } from "react-router";
+import SidebarGroupItem from "../SidebarGroupItem";
 
 export type SidebarProps = {
   wrapperProps?: StackProps;
 };
-
 
 export default function Sidebar({ wrapperProps }: SidebarProps) {
   const { isCompact } = useSidebarStore();
@@ -76,9 +75,9 @@ export default function Sidebar({ wrapperProps }: SidebarProps) {
       </Center>
       {/* Top */}
       <Stack gap={"xs"}>
-        {menuItems.map((item, index) => (
+        {menuItems.map((item) => (
           <SidebarGroupItem
-            key={index}
+            key={item.path}
             title={item.title}
             description={item.description}
             icon={item.icon}

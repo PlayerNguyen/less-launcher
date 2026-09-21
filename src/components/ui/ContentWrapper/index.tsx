@@ -1,5 +1,5 @@
-import { Box, MantineStyleProp, MantineTheme } from "@mantine/core";
-import { ReactNode } from "react";
+import { Box, type MantineStyleProp, type MantineTheme } from "@mantine/core";
+import type { ReactNode } from "react";
 
 export type ContentWrapperProps = {
   children: ReactNode;

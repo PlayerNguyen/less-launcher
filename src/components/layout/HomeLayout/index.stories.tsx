@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import HomeLayout from ".";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
+import HomeLayout from ".";
 
 const meta: Meta<typeof HomeLayout> = {
   title: "Layout/HomeLayout",

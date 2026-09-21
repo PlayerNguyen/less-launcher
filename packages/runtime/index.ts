@@ -1,3 +1,3 @@
-export { getLatestJREAsset, type AdoptiumAsset } from './adoptium'
-export { setupJavaRuntime } from './downloader'
+export { type AdoptiumAsset, getLatestJREAsset } from "./adoptium";
 export * from "./config";
+export { setupJavaRuntime } from "./downloader";

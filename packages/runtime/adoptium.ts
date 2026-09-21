@@ -1,6 +1,6 @@
-import fs from "fs";
-import { platform } from "os";
-import path from "path";
+import fs from "node:fs";
+import { platform } from "node:os";
+import path from "node:path";
 import log from "electron-log";
 
 const BASE_URL = "https://api.adoptium.net/v3/assets/latest";

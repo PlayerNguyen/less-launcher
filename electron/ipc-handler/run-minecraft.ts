@@ -1,7 +1,7 @@
-import { IpcHandler } from "@packages/ipc/types";
+import type { IpcHandler } from "@packages/ipc/types";
 import { runMinecraft } from "@packages/minecraft-runner/runner";
-import { SettingsState } from "@src/stores/settings.store";
-import { BrowserWindow, IpcMainInvokeEvent } from "electron";
+import type { SettingsState } from "@src/stores/settings.store";
+import type { BrowserWindow, IpcMainInvokeEvent } from "electron";
 import log from "electron-log/main";
 export class RunMinecraftHandler implements IpcHandler {
   channel: string = "app:run-minecraft";

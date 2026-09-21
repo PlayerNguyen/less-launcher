@@ -1,9 +1,9 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { getMinecraftDirectory, getVersionPath } from "@packages/fs";
-import * as path from "path";
-import * as fs from "fs";
+import type { Version } from "@packages/minecraft-version-resolver";
 import { RunnerArgument } from "./runner-argument";
-import { ArgumentAuth } from "./types";
-import { Version } from "@packages/minecraft-version-resolver";
+import type { ArgumentAuth } from "./types";
 
 export class ArgumentBuilder {
   private argument: RunnerArgument = new RunnerArgument();

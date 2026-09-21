@@ -1,16 +1,16 @@
-import fs from 'node:fs'
-import path from 'node:path'
+import fs from "node:fs";
+import path from "node:path";
 import { getVersionPath } from "@packages/fs";
-import {
-  VersionInfo,
-  Version,
+import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
+import { shouldAcceptRule } from "@packages/minecraft-manifest-rules/resolver";
+import type {
   AssetIndex,
   Library,
   ResolvedResource,
   TargetOS,
+  Version,
+  VersionInfo,
 } from "./types";
-import { shouldAcceptRule } from "@packages/minecraft-manifest-rules/resolver";
-import { getSystemCriteria } from "@packages/minecraft-manifest-rules/helper";
 
 /**
  * Fetches the specific details for a given Minecraft version.
@@ -128,16 +128,15 @@ export async function resolveResources(
     }
 
     // Native classifiers
-    if (lib.natives && lib.natives[targetOs]) {
-      const nativeKey = lib.natives[targetOs]!;
-
+    const nativeKey = lib.natives?.[targetOs];
+    if (nativeKey) {
       const resolvedNativeKey = nativeKey.replace(
         "${arch}",
         process.arch === "x64" ? "64" : "32",
       );
 
       const nativeDownload = lib.downloads?.classifiers?.[resolvedNativeKey];
-      if (nativeDownload && nativeDownload.path) {
+      if (nativeDownload?.path) {
         resources.push({
           url: nativeDownload.url,
           path: `libraries/${nativeDownload.path}`,

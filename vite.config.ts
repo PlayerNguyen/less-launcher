@@ -1,13 +1,15 @@
 /// <reference types="vitest/config" />
 /// <reference types="vitest" />
-import { defineConfig } from "vite";
+
 import path from "node:path";
-import electron from "vite-plugin-electron/simple";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
+import { defineConfig } from "vite";
+import electron from "vite-plugin-electron/simple";
+
 const dirname =
   typeof __dirname !== "undefined"
     ? __dirname

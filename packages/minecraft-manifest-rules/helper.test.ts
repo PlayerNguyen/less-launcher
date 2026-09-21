@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
-import os from "os";
+import os from "node:os";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { getSystemCriteria } from "./helper";
 
 describe("getSystemCriteria", () => {

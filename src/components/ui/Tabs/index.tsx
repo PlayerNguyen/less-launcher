@@ -1,6 +1,6 @@
 import {
   Tabs as MantineTabs,
-  TabsProps as MantineTabsProps,
+  type TabsProps as MantineTabsProps,
 } from "@mantine/core";
 import classes from "./index.module.css";
 

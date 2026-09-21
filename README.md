@@ -28,7 +28,7 @@ Less Launcher resolves Minecraft versions, downloads game resources, provisions 
 | Build      | Vite 5, `vite-plugin-electron`, TypeScript 5 project references  |
 | Packaging  | electron-builder (NSIS / DMG / AppImage)                          |
 | Testing    | Vitest 4 + Playwright (Chromium), Storybook 10 test integration  |
-| Quality    | ESLint 8, Storybook a11y addon, TypeScript strict mode           |
+| Quality    | Biome 2 (lint + format), Storybook a11y addon, TypeScript strict mode |
 
 ## Prerequisites
 
@@ -57,7 +57,9 @@ npm run dev
 | `npm run dev`             | Start Vite and launch the Electron app with HMR.                       |
 | `npm run build:packages`  | Compile the local TypeScript packages (`tsc -b packages`).             |
 | `npm run build`           | Build packages, typecheck, bundle, and package with electron-builder.  |
-| `npm run lint`            | Run ESLint with `--max-warnings 0`.                                    |
+| `npm run lint`            | Run Biome (lint, format, and import order checks).                     |
+| `npm run lint:fix`        | Apply Biome's safe fixes and formatting.                              |
+| `npm run format`          | Format the codebase with Biome.                                       |
 | `npm run test`            | Run the Vitest suite.                                                  |
 | `npm run storybook`       | Run Storybook on port 6006.                                            |
 | `npm run build-storybook` | Build a static Storybook.                                              |
@@ -102,7 +104,7 @@ less-launcher/
 - **Main process** (`electron/main.ts`) creates the window, initializes logging and config, and registers IPC handlers.
 - **Preload** (`electron/preload.ts`) exposes a typed `window.ipcRenderer` API via `contextBridge`.
 - **Renderer** (`src/main.tsx` → `src/App.tsx`) renders the React app and calls the main process through `window.ipcRenderer.invoke(...)`.
-- **Packages** (`packages/`) contain pure, reusable logic. They must **never** import from `src/` or `electron/` (enforced by ESLint).
+- **Packages** (`packages/`) contain pure, reusable logic. They must **never** import from `src/` or `electron/` (enforced by Biome's `noRestrictedImports`).
 - **IPC handlers** implement the `IpcHandler` interface and are registered through `getIpcHandlerContext()` in `packages/ipc`.
 
 ### Path Aliases

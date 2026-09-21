@@ -1,11 +1,11 @@
-import { Version } from "@packages/minecraft-version-resolver";
-import path from "path";
-import { Argument, RunnerArgumentBuildOptions } from "./types";
-import {
+import path from "node:path";
+import { pickValue } from "@packages/minecraft-manifest-rules/resolver";
+import type {
   ConditionalArgument,
   Criteria,
 } from "@packages/minecraft-manifest-rules/types";
-import { pickValue } from "@packages/minecraft-manifest-rules/resolver";
+import type { Version } from "@packages/minecraft-version-resolver";
+import type { Argument, RunnerArgumentBuildOptions } from "./types";
 
 export class RunnerArgument implements Argument {
   runtimeDirectory: string = "";

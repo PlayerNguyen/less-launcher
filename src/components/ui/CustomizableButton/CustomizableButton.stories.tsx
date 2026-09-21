@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import CustomizableButton from "./index";
-import { BiStopCircle } from "react-icons/bi";
-
 import { AiFillAccountBook, AiOutlineCheck } from "react-icons/ai";
+import { BiStopCircle } from "react-icons/bi";
+import CustomizableButton from "./index";
 
 const meta = {
   title: "UI/CustomizableButton",

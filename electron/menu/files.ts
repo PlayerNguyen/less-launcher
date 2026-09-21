@@ -3,7 +3,7 @@ import {
   getLauncherConfigPath,
   getMinecraftDirectory,
 } from "@packages/fs";
-import { MenuItem, shell } from "electron";
+import { type MenuItem, shell } from "electron";
 
 export const fileMenu: (MenuItem | Partial<MenuItem>)[] = [
   {

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Button } from "@mantine/core";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AiOutlineBarcode, AiOutlinePause } from "react-icons/ai";
 
 const meta: Meta<typeof Button> = {

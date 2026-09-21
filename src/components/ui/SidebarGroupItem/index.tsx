@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
 import { Center, Flex, Stack, Text, UnstyledButton } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
+import type { ReactElement } from "react";
 
 interface SidebarGroupItemProps {
   title: string;

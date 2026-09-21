@@ -1,15 +1,15 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import https from 'node:https'
+import fs from "node:fs";
+import https from "node:https";
+import path from "node:path";
+import { ConfigContext } from "@packages/config";
 import { ensureDir, getRuntimePath } from "@packages/fs";
-import {
-  getLatestJREAsset,
-  resolveAdaptiumFolder,
-  type AdoptiumAsset,
-} from "./adoptium";
 import extractZip from "extract-zip";
 import * as tar from "tar";
-import { ConfigContext } from "@packages/config";
+import {
+  type AdoptiumAsset,
+  getLatestJREAsset,
+  resolveAdaptiumFolder,
+} from "./adoptium";
 import { RuntimeConfigIntent } from "./config";
 
 /**
@@ -107,7 +107,7 @@ export async function setupJavaRuntime(
   const targetDir = path.join(runtimeBaseDir, versionStr);
 
   if (fs.existsSync(targetDir) && fs.readdirSync(targetDir).length > 0) {
-    onProgress?.("Found existing Java Runtime version " + versionStr);
+    onProgress?.(`Found existing Java Runtime version ${versionStr}`);
     ConfigContext.use(RuntimeConfigIntent).set({
       latestRuntimeVersion: versionStr,
     });

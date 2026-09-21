@@ -1,17 +1,17 @@
 import path from "node:path";
-import { app, BrowserWindow, Menu } from "electron";
 import { fileURLToPath } from "node:url";
+import { ConfigContext } from "@packages/config";
+import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
+import { app, BrowserWindow, Menu } from "electron";
+import log from "electron-log/main";
 import { getIpcHandlerContext } from "../packages/ipc";
+import { LauncherConfig } from "./configs/config";
+import { LauncherMetadata } from "./configs/launcher-metadata";
 import { DevDownloadVersionHandler } from "./ipc-handler/dev-download-version";
 import { ListMinecraftVersionsHandler } from "./ipc-handler/list-minecraft-versions";
+import { RunMinecraftHandler } from "./ipc-handler/run-minecraft";
 import { debuggerMenu } from "./menu/debugger";
 import { fileMenu } from "./menu/files";
-import { RunMinecraftHandler } from "./ipc-handler/run-minecraft";
-import { ConfigContext } from "@packages/config";
-import { LauncherMetadata } from "./configs/launcher-metadata";
-import { LauncherConfig } from "./configs/config";
-import { RuntimeConfig, RuntimeConfigIntent } from "@packages/runtime/config";
-import log from "electron-log/main";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -27,7 +27,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 process.env.APP_ROOT = path.join(__dirname, "..");
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
-export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
+export const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL;
 export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 

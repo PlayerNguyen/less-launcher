@@ -1,5 +1,5 @@
-import { Criteria, OperatingSystem } from "./types";
-import os from "os";
+import os from "node:os";
+import type { Criteria, OperatingSystem } from "./types";
 
 function getTargetOS(): OperatingSystem {
   if (process.platform === "win32") return "windows";

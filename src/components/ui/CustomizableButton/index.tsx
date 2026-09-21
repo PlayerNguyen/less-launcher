@@ -1,11 +1,11 @@
 import {
-  UnstyledButton,
+  type MantineTheme,
   Stack,
   Text,
   Title,
-  MantineTheme,
+  UnstyledButton,
 } from "@mantine/core";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 import ContentWrapper from "../ContentWrapper";
 
 interface CustomizableButtonProps {
@@ -39,7 +39,7 @@ export default function CustomizableButton({
     <ContentWrapper variant={variant}>
       <UnstyledButton
         role="button"
-        tabIndex={1}
+        tabIndex={0}
         style={(theme) => ({
           padding: "0.6rem",
           display: "flex",

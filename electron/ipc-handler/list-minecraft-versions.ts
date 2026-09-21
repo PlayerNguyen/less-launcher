@@ -1,4 +1,4 @@
-import { IpcHandler } from "@packages/ipc/types";
+import type { IpcHandler } from "@packages/ipc/types";
 import { listAllVersions } from "../../packages/minecraft-version-resolver";
 
 export class ListMinecraftVersionsHandler implements IpcHandler {

@@ -20,7 +20,8 @@ Requires **Node.js 20.x**.
 npm run dev              # Start Vite + Electron (dev)
 npm run build:packages   # Compile local packages (tsc -b packages) — run BEFORE build
 npm run build            # packages → tsc → vite build → electron-builder
-npm run lint             # ESLint, --max-warnings 0
+npm run lint             # Biome: lint + format + import order
+npm run lint:fix         # Apply Biome safe fixes and formatting
 npm run test             # Vitest (browser via Playwright/Chromium)
 npm run storybook        # Storybook on :6006
 npm run build-storybook  # Static Storybook
@@ -53,7 +54,7 @@ TypeScript project references — pure, reusable logic:
 
 ### 1. Package Isolation
 
-Packages in `packages/` **must not** import from `src/` or `electron/` (nor use `../*` escapes). ESLint's `no-restricted-imports` enforces this; app code may import packages freely.
+Packages in `packages/` **must not** import from `src/` or `electron/` (nor use `../*` escapes). Biome's `noRestrictedImports` enforces this; app code may import packages freely.
 
 ```ts
 // ❌ Forbidden inside packages/
@@ -127,11 +128,11 @@ docs(agent): add agent instructions
 
 ## Common Pitfalls
 
-1. Importing app code inside `packages/` fails ESLint — keep packages isolated.
+1. Importing app code inside `packages/` fails Biome — keep packages isolated.
 2. Forgetting `npm run build:packages` causes stale/missing type errors.
 3. `window.ipcRenderer` is only available in the renderer; guard main-process code accordingly.
 4. New IPC handlers must be registered in `electron/main.ts` via `getIpcHandlerContext().registerHandler(...)`.
-5. `npm run lint` fails on **any** warning (`--max-warnings 0`).
+5. `npm run lint` runs `biome check`; run `npm run lint:fix` to apply fixes and formatting.
 
 ## Pull Request Checklist (for agents)
 

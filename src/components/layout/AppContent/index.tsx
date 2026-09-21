@@ -1,6 +1,6 @@
 import { Box } from "@mantine/core";
 import clsx from "clsx";
-import React from "react";
+import type React from "react";
 
 export type AppContentProps = {
   children: React.ReactElement;
