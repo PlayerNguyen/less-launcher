@@ -1,4 +1,4 @@
-import { ConfigIntent } from "@packages/config";
+import type { ConfigIntent } from "@packages/config";
 
 export class RuntimeConfig {
   /**

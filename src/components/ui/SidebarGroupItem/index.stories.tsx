@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import SidebarGroupItem from "./index";
 import { AiFillBook, AiFillHome } from "react-icons/ai";
 import { BiPackage } from "react-icons/bi";
+import SidebarGroupItem from "./index";
 
 const meta = {
   title: "UI/SidebarGroupItem",

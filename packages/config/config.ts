@@ -1,6 +1,6 @@
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import path from "node:path";
 import { ensureDir, getLauncherConfigPath } from "@packages/fs";
-import { existsSync, readFileSync, writeFileSync } from "fs";
-import path from "path";
 /**
  *
  */

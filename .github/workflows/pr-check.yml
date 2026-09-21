@@ -26,7 +26,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run Linter
+      - name: Run Biome Check
         run: npm run lint
 
       - name: Build Packages (tsc -b)

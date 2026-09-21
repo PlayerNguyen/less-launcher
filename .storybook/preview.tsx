@@ -3,8 +3,8 @@ import "@mantine/core/styles.css";
 import "@fontsource-variable/roboto-mono";
 import "@fontsource-variable/inter";
 
-import type { Preview } from "@storybook/react";
 import { MantineProvider } from "@mantine/core";
+import type { Preview } from "@storybook/react";
 import { withRouter } from "storybook-addon-remix-react-router";
 import theme from "../src/theme";
 

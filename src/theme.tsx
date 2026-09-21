@@ -1,6 +1,6 @@
 import { createTheme } from "@mantine/core";
-import { ButtonTheme } from "./themes/Button";
 import { ActionIconTheme } from "./themes/ActionIcon";
+import { ButtonTheme } from "./themes/Button";
 
 const theme = createTheme({
   /**

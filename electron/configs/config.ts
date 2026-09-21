@@ -1,5 +1,5 @@
-import { ConfigIntent } from "@packages/config";
-import { LauncherMetadata } from "./launcher-metadata";
+import type { ConfigIntent } from "@packages/config";
+import type { LauncherMetadata } from "./launcher-metadata";
 
 export const LauncherConfig = {
   Metadata: {

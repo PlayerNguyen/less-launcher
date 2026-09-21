@@ -1,7 +1,7 @@
+import { randomUUID } from "node:crypto";
 import { runMinecraft } from "@packages/minecraft-runner/runner";
 import { getLatestVersions } from "@packages/minecraft-version-resolver";
 import { MenuItem } from "electron";
-import { randomUUID } from "crypto";
 
 export const debuggerMenu: () => (MenuItem | Partial<MenuItem>)[] = () => [
   new MenuItem({ role: "toggleDevTools" }),
@@ -20,7 +20,7 @@ export const debuggerMenu: () => (MenuItem | Partial<MenuItem>)[] = () => [
           });
         },
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: Electron submenu item types do not align exactly
     ] as any,
   },
 ];

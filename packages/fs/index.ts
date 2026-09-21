@@ -1,6 +1,6 @@
+import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import fs from "node:fs";
 
 /**
  * Returns the application data directory based on the user's OS.

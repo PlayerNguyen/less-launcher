@@ -1,5 +1,5 @@
 import { ActionIcon } from "@mantine/core";
-import { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AiFillBell } from "react-icons/ai";
 
 const meta: Meta<typeof ActionIcon> = {

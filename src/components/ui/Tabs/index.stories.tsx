@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react-vite";
-import Tabs from ".";
 import { Box } from "@mantine/core";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AiFillMessage, AiFillPicture, AiFillSetting } from "react-icons/ai";
+import Tabs from ".";
 
 const meta: Meta<typeof Tabs> = {
   title: "Components/Tabs",

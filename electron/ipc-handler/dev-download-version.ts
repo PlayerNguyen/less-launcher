@@ -1,14 +1,14 @@
+import * as path from "node:path";
+import type { IpcMainInvokeEvent } from "electron";
+import log from "electron-log";
 import { getAppDataPath } from "../../packages/fs";
-import { IpcHandler } from "../../packages/ipc/types";
+import type { IpcHandler } from "../../packages/ipc/types";
 import {
   downloadResources,
   getVersionDetails,
   getVersionManifest,
   resolveResources,
 } from "../../packages/minecraft-version-resolver";
-import { IpcMainInvokeEvent } from "electron";
-import * as path from "path";
-import log from "electron-log";
 export class DevDownloadVersionHandler implements IpcHandler {
   channel: string = "dev:download-version";
 

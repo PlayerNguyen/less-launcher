@@ -1,10 +1,10 @@
 import { Button, Flex, Grid, Stack, Text, Title } from "@mantine/core";
+import Tabs from "@src/components/ui/Tabs";
 import UsernameTextInput from "@src/components/ui/UsernameTextInput";
 import VersionSelectBox from "@src/components/ui/VersionSelectBox";
-import { BiNews, BiPlay } from "react-icons/bi";
-import Tabs from "@src/components/ui/Tabs";
-import clsx from "clsx";
 import { useSettingStore } from "@src/stores/settings.store";
+import clsx from "clsx";
+import { BiNews, BiPlay } from "react-icons/bi";
 
 export default function Home() {
   const { lastPlayedVersion, lastUsername } = useSettingStore();

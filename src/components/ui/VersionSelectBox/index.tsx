@@ -1,4 +1,4 @@
-import { ComboboxItem, Select, SelectProps } from "@mantine/core";
+import { type ComboboxItem, Select, type SelectProps } from "@mantine/core";
 import useMinecraftVersionStore from "@src/stores/minecraft-version.store";
 import { useSettingStore } from "@src/stores/settings.store";
 import { useEffect } from "react";

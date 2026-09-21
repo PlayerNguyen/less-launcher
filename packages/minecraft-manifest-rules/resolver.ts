@@ -1,4 +1,4 @@
-import { Rule, Criteria, ConditionalArgument } from "./types";
+import type { ConditionalArgument, Criteria, Rule } from "./types";
 
 /**
  * Evaluates a list of rules against the current system criteria.

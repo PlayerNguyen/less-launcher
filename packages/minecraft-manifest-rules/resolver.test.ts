@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { shouldAcceptRule, pickValue } from "./resolver";
-import { Rule, Criteria, ConditionalArgument } from "./types";
+import { describe, expect, it } from "vitest";
+import { pickValue, shouldAcceptRule } from "./resolver";
+import type { ConditionalArgument, Criteria, Rule } from "./types";
 
 describe("shouldAcceptRule", () => {
   it("shouldReturnTrueWhenRulesIsUndefined", () => {

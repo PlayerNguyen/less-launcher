@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { IpcHandler } from "./types";
+import type { IpcHandler } from "./types";
 
 export class IpcHandlerContext {
   private handlers: Map<string, IpcHandler> = new Map();
